@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Challenges Board</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <h1 class="text-center">Challenges Board</h1>
+          <hr/>
+          <br/>
+        </div>
+      </div>
+
+      <div id="register-container" class="row">
+        <form id='register-form'>
+          <label for='username-input'>Enter your username:</label><br>
+          <input type="text" id='username-input' name='username-input'><br>
+          <input class="register-button" type="submit" data-id="0" value='Sign Up!'>
+        </form>
+        </div>
+
+      <p id='username'></p><p>Welcome back!</p>
+
+      <div id="challenges-container">
+        <ul>
+          <li>
+            <div id='challengeListItem'>
+              <p>Challenge 1</p>
+              <button id='challenge1-deploy' class='deploy-buttons'>Deploy</button>
+              <div id='challenge1-play' class='play-buttons'><button id='challenge1-button'>Play</button><p id='challenge1-status'>NOT COMPLETED</p></div>
+            </div>
+          </li>
+          <li>
+            <div id='challengeListItem'>
+              <p>Challenge 2</p>
+              <button id='challenge2-deploy' class='deploy-buttons'>Deploy</button>
+              <div id='challenge2-play' class='play-buttons'><button id='challenge2-button'>Play</button><p id='challenge2-status'>NOT COMPLETED</p></div>
+            </div>
+          </li>
+          <li>
+            <div id='challengeListItem'>
+              <p>Challenge 3</p>
+              <button id='challenge3-deploy' class='deploy-buttons'>Deploy</button>
+              <div id='challenge3-play' class='play-buttons'><button id='challenge3-button'>Play</button><p id='challenge3-status'>NOT COMPLETED</p></div>
+            </div>
+            <li>
+              <div id='challengeListItem'>
+                <p>Challenge 4</p>
+                <button id='challenge4-deploy' class='deploy-buttons'>Deploy</button>
+                <div id='challenge4-play' class='play-buttons'><button id='challenge4-button'>Play</button><p id='challenge4-status'>NOT COMPLETED</p></div>
+              </div>
+            </li>
+          </li>
+        </ul>
+      </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/ctfManager.js"></script>
+  </body>
+</html>
