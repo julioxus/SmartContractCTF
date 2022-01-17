@@ -111,7 +111,7 @@
   "sourceMap": "120:1759:0:-;;;613:59;8:9:-1;5:2;;;30:1;27;20:12;5:2;613:59:0;653:10;645:5;;:18;;;;;;;;;;;;;;;;;;120:1759;;;;;;",
   "deployedSourceMap": "120:1759:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1667:203;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1667:203:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;1216:122;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1216:122:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;714:103;;8:9:-1;5:2;;;30:1;27;20:12;5:2;714:103:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;846:107;;8:9:-1;5:2;;;30:1;27;20:12;5:2;846:107:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;846:107:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;991:182;;8:9:-1;5:2;;;30:1;27;20:12;5:2;991:182:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1382:244;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1382:244:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1667:203;1799:8;:20;1808:10;1799:20;;;;;;;;;;;;;;;:31;;:44;1831:11;1799:44;;;;;;;;;;;;;;;:49;;;;;;;;;;;;1782:78;;;:80;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1782:80:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1782:80:0;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1782:80:0;;;;;;;;;;;;;;;;1728:8;:20;1737:10;1728:20;;;;;;;;;;;;;;;:31;;:44;1760:11;1728:44;;;;;;;;;;;;;;;:51;;;:134;;;;;;;;;;;;;;;;;;1667:203;:::o;1216:122::-;1285:8;:20;1294:10;1285:20;;;;;;;;;;;;;;;:31;;:44;1317:11;1285:44;;;;;;;;;;;;;;;;1278:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1216:122;:::o;714:103::-;801:8;769;:20;778:10;769:20;;;;;;;;;;;;;;;:29;;:40;;;;;;;;;;;;:::i;:::-;;714:103;:::o;846:107::-;890:6;916:8;:20;925:10;916:20;;;;;;;;;;;;;;;:29;;909:36;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;846:107;:::o;991:182::-;1120:45;;;;;;;;;1136:13;1120:45;;;;;;1158:5;1120:45;;;;;1073:8;:20;1082:10;1073:20;;;;;;;;;;;;;;;:31;;:44;1105:11;1073:44;;;;;;;;;;;;;;;:92;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;991:182;;:::o;1382:244::-;1444:7;1453:4;1492:8;:20;1501:10;1492:20;;;;;;;;;;;;;;;:31;;:44;1524:11;1492:44;;;;;;;;;;;;;;;:49;;;;;;;;;;;;1556:8;:20;1565:10;1556:20;;;;;;;;;;;;;;;:31;;:44;1588:11;1556:44;;;;;;;;;;;;;;;:51;;;;;;;;;;;;1470:148;;;;1382:244;;;:::o;120:1759::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity ^0.4.21;\r\n\r\ninterface LotteryChallenge {\r\n    function isComplete() external view returns (bool);\r\n}\r\n\r\ncontract CTFManager {\r\n\r\n    // Define challenge struct\r\n    struct Challenge {\r\n        address addr;\r\n        bool solved;\r\n    }\r\n\r\n    // Define user struct\r\n    struct User { \r\n        string username;\r\n        mapping (uint8 => Challenge) challenges;\r\n    }\r\n\r\n    // Users object\r\n    mapping(address => User) ctfUsers;\r\n\r\n    // Define variable owner of the type address\r\n    address owner;\r\n\r\n    // This function is executed at initialization and sets the owner of the contract\r\n    constructor() public {\r\n        owner = msg.sender; \r\n    }\r\n\r\n    // Creates or update a user.\r\n    function createUser(string username) public {\r\n        ctfUsers[msg.sender].username = username;\r\n    }\r\n\r\n    // Get Username\r\n    function getUsername() public view returns (string) {\r\n        return ctfUsers[msg.sender].username;\r\n    }\r\n\r\n    // Add challenge to user\r\n    function addChallenge(uint8 challengeId, address challengeAddr) public {\r\n        ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:challengeAddr, solved:false});\r\n    }\r\n\r\n    // Remove challenge from user\r\n    function removeChallenge(uint8 challengeId) public {\r\n        delete(ctfUsers[msg.sender].challenges[challengeId]);\r\n    }\r\n\r\n    // Fetch Challenge n from user\r\n    function getChallenge(uint8 challengeId) public view returns (address, bool) {\r\n        return (\r\n            ctfUsers[msg.sender].challenges[challengeId].addr,\r\n            ctfUsers[msg.sender].challenges[challengeId].solved\r\n        );\r\n    }\r\n\r\n    // Check Challenge Solution\r\n    function checkChallenge(uint8 challengeId) public {\r\n        ctfUsers[msg.sender].challenges[challengeId].solved = LotteryChallenge(ctfUsers[msg.sender].challenges[challengeId].addr).isComplete();\r\n    }\r\n    \r\n}",
-  "sourcePath": "C:\\Users\\juli-\\CTF Blockchain\\ctf-challenges\\contracts\\CTFManager.sol",
+  "sourcePath": "C:\\Users\\juli-\\CTF Blockchain\\SmartContractCTF\\contracts\\CTFManager.sol",
   "ast": {
     "absolutePath": "project:/contracts/CTFManager.sol",
     "exportedSymbols": {
@@ -4241,16 +4241,21 @@
     "version": "0.4.26+commit.4563c3fc.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0xCE90C8c45ED077e9Ec90753BC394cc2501e3315a",
+      "transactionHash": "0xdddeeb54213bd383b3c76ef3fc9257a4cd2d07c3b97fac83e4d9254ba30916d0"
+    },
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x9bfcc3E4896f21Ca1FE3D8e6E3cdbbBBDCC8eD84",
-      "transactionHash": "0xa017f0f83702bbe338ad64f78397b93c27db0ecf72351c50fc02e4463add753d"
+      "address": "0xBCDf0F80b6f6415C7b05B25dB909a0C8A999F5d7",
+      "transactionHash": "0xb46763fe08e17b514bff891857cae09b7ebc2ad5662502206075a0e30ad87a4a"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-17T14:10:06.339Z",
-  "networkType": "ethereum",
+  "updatedAt": "2022-01-17T19:14:46.168Z",
   "devdoc": {
     "methods": {}
   },

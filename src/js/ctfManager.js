@@ -35,7 +35,7 @@ App = {
       $.getJSON('CTFManager.json', function(data) {
         // Get the necessary contract artifact file and instantiate it with @truffle/contract
         var CTFManagerArtifact = data;
-        App.contracts.CTFManager = TruffleContract(CTFManagerArtifact);
+        App.contracts.CTFManager = TruffleContract(CTFManagerArtifact, '0xB5fD08E05DB07D31b836252B29aD004Cd4e98d37');
       
         // Set the provider for our contract
         App.contracts.CTFManager.setProvider(App.web3Provider);
@@ -47,10 +47,9 @@ App = {
         App.getUsername();
 
         // Check wether the user challenges are completed or not
-        App.getChallenge(1);
-        App.getChallenge(2);
-        App.getChallenge(3);
-        App.getChallenge(4);
+        for (let i = 1; i <= 4; i++) {
+          App.getChallenge(i);
+        }
 
       });
   
