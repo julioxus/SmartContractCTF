@@ -35,7 +35,7 @@ App = {
       $.getJSON('CTFManager.json', function(data) {
         // Get the necessary contract artifact file and instantiate it with @truffle/contract
         var CTFManagerArtifact = data;
-        App.contracts.CTFManager = TruffleContract(CTFManagerArtifact, '0xB5fD08E05DB07D31b836252B29aD004Cd4e98d37');
+        App.contracts.CTFManager = TruffleContract(CTFManagerArtifact);
       
         // Set the provider for our contract
         App.contracts.CTFManager.setProvider(App.web3Provider);
@@ -87,7 +87,6 @@ App = {
             // Execute as a transaction by sending account
             return CTFManagerInstance.createUser(username, {from: account});
           }).then(function(result) {
-            console.log(result);
             location.reload();
           }).catch(function(err) {
             console.log(err.message);
@@ -98,57 +97,73 @@ App = {
     getUsername: function() {
         var CTFManagerInstance;
 
-        App.contracts.CTFManager.deployed().then(function(instance) {
-            CTFManagerInstance = instance;
+        web3.eth.getAccounts(function(error, accounts) {
+          if (error) {
+            console.log(error);
+          }
+    
+          var account = accounts[0];
 
-        return CTFManagerInstance.getUsername();
-        }).then(function(username) {
-            $('#username').text(username)
-        }).catch(function(err) {
-        console.log(err.message);
+          App.contracts.CTFManager.deployed().then(function(instance) {
+              CTFManagerInstance = instance;
+          
+          return CTFManagerInstance.getUsername({from: account});
+          }).then(function(username) {
+              $('#username').text(username)
+          }).catch(function(err) {
+          console.log(err.message);
+          });
         });
     },
 
     getChallenge: function(challengeId){
       var CTFManagerInstance;
 
-        App.contracts.CTFManager.deployed().then(function(instance) {
-            CTFManagerInstance = instance;
-      
-      return CTFManagerInstance.getChallenge(challengeId)
-      }).then(function(challenge){
-
-        // Check which challenges the user has deployed
-        if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
-          switch(challengeId){
-            case 1: 
-              $('#challenge1-play').show();
-              $('#challenge1-deploy').hide();
-              // Mark the challenge when completed
-              if (challenge[1] === true) { $('#challenge1-status').text('COMPLETED!!!') };
-              break;
-            case 2:
-              $('#challenge2-play').show();
-              $('#challenge2-deploy').hide();
-              // Mark the challenge when completed
-              if (challenge[1] === true) { $('#challenge2-status').text('COMPLETED!!!') };
-              break;
-            case 3:
-              $('#challenge3-play').show();
-              $('#challenge3-deploy').hide();
-              // Mark the challenge when completed
-              if (challenge[1] === true) { $('#challenge3-status').text('COMPLETED!!!') };
-              break;
-            case 4:
-              $('#challenge4-play').show();
-              $('#challenge4-deploy').hide();
-              // Mark the challenge when completed
-              if (challenge[1] === true) { $('#challenge4-status').text('COMPLETED!!!') };
-              break;
-          }
+      web3.eth.getAccounts(function(error, accounts) {
+        if (error) {
+          console.log(error);
         }
-      }).catch(function(err) {
-        console.log(err.message);
+  
+          var account = accounts[0];
+
+          App.contracts.CTFManager.deployed().then(function(instance) {
+              CTFManagerInstance = instance;
+        
+        return CTFManagerInstance.getChallenge(challengeId, {from: account})
+        }).then(function(challenge){
+
+          // Check which challenges the user has deployed
+          if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
+            switch(challengeId){
+              case 1: 
+                $('#challenge1-play').show();
+                $('#challenge1-deploy').hide();
+                // Mark the challenge when completed
+                if (challenge[1] === true) { $('#challenge1-status').text('COMPLETED!!!') };
+                break;
+              case 2:
+                $('#challenge2-play').show();
+                $('#challenge2-deploy').hide();
+                // Mark the challenge when completed
+                if (challenge[1] === true) { $('#challenge2-status').text('COMPLETED!!!') };
+                break;
+              case 3:
+                $('#challenge3-play').show();
+                $('#challenge3-deploy').hide();
+                // Mark the challenge when completed
+                if (challenge[1] === true) { $('#challenge3-status').text('COMPLETED!!!') };
+                break;
+              case 4:
+                $('#challenge4-play').show();
+                $('#challenge4-deploy').hide();
+                // Mark the challenge when completed
+                if (challenge[1] === true) { $('#challenge4-status').text('COMPLETED!!!') };
+                break;
+            }
+          }
+        }).catch(function(err) {
+          console.log(err.message);
+        });
       });
     },
 
@@ -158,12 +173,13 @@ App = {
       App.contracts.CTFManager.deployed().then(function(instance) {
           CTFManagerInstance = instance;
 
-      return CTFManagerInstance.addChallenge(challengeId, challengeAddr, {from: account});
-      }).then(function() {
-          console.log('challenge ' + challengeId + ' deployed at: ' + challengeAddr);
-      }).catch(function(err) {
-          console.log(err.message);
-      });
+          return CTFManagerInstance.addChallenge(challengeId, challengeAddr, {from: account});
+        }).then(function() {
+            console.log('challenge ' + challengeId + ' deployed at: ' + challengeAddr);
+            location.reload();
+        }).catch(function(err) {
+            console.log(err.message);
+        });
     },
 
     deployLottery: function(){
@@ -187,7 +203,6 @@ App = {
             // Generate new contract in the provider network.
             App.contracts.LotteryChallenge.new({from: account, value: "1000000000000000000"}).then((newContract) => {
               App.addChallenge(1, newContract.address, account);
-              location.reload();
             });
             
         });

@@ -1,6 +1,7 @@
 App = {
   web3Provider: null,
   contracts: {},
+  challengeAddr : null,
 
   init: async function() {
     return await App.initWeb3();
@@ -51,41 +52,51 @@ App = {
 
   bindEvents: function() {
     $('#guess-form').submit(App.guess);
+    $('#checkSolutionButton').click(App.checkSolution);
   },
 
   getChallenge: function(challengeId){
     var CTFManagerInstance;
 
-      App.contracts.CTFManager.deployed().then( function(instance) {
+    web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+
+      var account = accounts[0];
+
+      App.contracts.CTFManager.deployed().then(function(instance) {
           CTFManagerInstance = instance;
     
-    return CTFManagerInstance.getChallenge(challengeId)
-    }).then(function(challenge){
-
-      // Check which challenges the user has deployed
-      if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
-        $('#contractAddressLink').text(challenge[0]);
-        $('#contractAddressLink').attr("href", 'https://ropsten.etherscan.io/address/' + challenge[0]);
+      return CTFManagerInstance.getChallenge(challengeId, {from: account})
+      }).then(function(challenge){
         
-        $.getJSON('LotteryChallenge.json', function(data) {
-          // Get the necessary contract artifact file and instantiate it with @truffle/contract
-          var LotteryChallengeArtifact = data;
-          App.contracts.LotteryChallenge = TruffleContract(LotteryChallengeArtifact, challenge[0]);
-        
-          // Set the provider for our contract
-          App.contracts.LotteryChallenge.setProvider(App.web3Provider);
-        
-          // Use our contract to retrieve if the challenge is complete
-          App.isComplete();
-    
-        });
+        // Check which challenges the user has deployed
+        if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
+          $('#contractAddressLink').text(challenge[0]);
+          $('#contractAddressLink').attr("href", 'https://ropsten.etherscan.io/address/' + challenge[0]);
+          
+          $.getJSON('LotteryChallenge.json', function(data) {
+            // Get the necessary contract artifact file and instantiate it with @truffle/contract
+            var LotteryChallengeArtifact = data;
+            App.contracts.LotteryChallenge = TruffleContract(LotteryChallengeArtifact);
+          
+            // Set the provider for our contract
+            App.contracts.LotteryChallenge.setProvider(App.web3Provider);
+          
+            // Use our contract to retrieve if the challenge is complete
+            App.challengeAddr = challenge[0];
+            App.isComplete();
+      
+          });
 
 
-      } else {
-        console.log('Contract is not deployed');
-      }
-    }).catch(function(err) {
-      console.log(err.message);
+        } else {
+          console.log('Contract is not deployed');
+        }
+      }).catch(function(err) {
+        console.log(err.message);
+      });
     });
   },
 
@@ -93,18 +104,26 @@ App = {
 
     var lotteryInstance;
 
-    App.contracts.LotteryChallenge.deployed().then(function(instance) {
-      lotteryInstance = instance;
+    web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
 
-      return lotteryInstance.isComplete.call();
-    }).then(function(complete) {
-        if (complete){
-          $('#isCompleted').text('Challenge is completed!')
-        } else {
-          $('#isCompleted').text('Challenge is NOT completed!')
-        }
-    }).catch(function(err) {
-      console.log(err.message);
+      var account = accounts[0];
+
+      App.contracts.LotteryChallenge.at(App.challengeAddr).then(function(instance) {
+        lotteryInstance = instance;
+
+        return lotteryInstance.isComplete({from: account});
+      }).then(function(complete) {
+          if (complete){
+            $('#isCompleted').text('Challenge is completed!')
+          } else {
+            $('#isCompleted').text('Challenge is NOT completed!')
+          }
+      }).catch(function(err) {
+        console.log(err.message);
+      });
     });
   },
 
@@ -124,17 +143,35 @@ App = {
 
       var account = accounts[0];
 
-      App.contracts.LotteryChallenge.deployed().then(function(instance) {
+      App.contracts.LotteryChallenge.at(App.challengeAddr).then(function(instance) {
         lotteryInstance = instance;
 
         // Execute as a transaction by sending account
         return lotteryInstance.guess(n, {value: "1000000000000000000", from: account});
       }).then(function(result) {
         console.log('number introduced: ' + n);
-        location.reload();
       }).catch(function(err) {
         console.log(err.message);
       });
+    });
+  },
+
+  checkSolution: function(event){
+
+    event.preventDefault();
+
+    web3.eth.getAccounts(function(error, accounts) {
+
+      account = accounts[0];
+
+      App.contracts.CTFManager.deployed().then(function(instance) {
+        CTFManagerInstance = instance;
+        // Mark challenge as completed!
+        return CTFManagerInstance.checkChallenge(1, {from: account})
+      }).then(function(solved) { console.log(solved); if(solved === true){ window.location.replace("index.html"); } });
+      if (error) {
+        console.log(error);
+      }
     });
   }
 

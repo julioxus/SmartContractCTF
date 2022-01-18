@@ -22,7 +22,7 @@ contract CTFManager {
     mapping(address => User) ctfUsers;
 
     // Define variable owner of the type address
-    address owner;
+    address public owner;
 
     // This function is executed at initialization and sets the owner of the contract
     constructor() public {
@@ -42,6 +42,7 @@ contract CTFManager {
     // Add challenge to user
     function addChallenge(uint8 challengeId, address challengeAddr) public {
         ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:challengeAddr, solved:false});
+        
     }
 
     // Remove challenge from user
@@ -58,8 +59,10 @@ contract CTFManager {
     }
 
     // Check Challenge Solution
-    function checkChallenge(uint8 challengeId) public {
-        ctfUsers[msg.sender].challenges[challengeId].solved = LotteryChallenge(ctfUsers[msg.sender].challenges[challengeId].addr).isComplete();
+    function checkChallenge(uint8 challengeId) public returns (bool) {
+        bool solved = LotteryChallenge(ctfUsers[msg.sender].challenges[challengeId].addr).isComplete();
+        ctfUsers[msg.sender].challenges[challengeId].solved = solved;
+        return solved;
     }
     
 }
