@@ -55,22 +55,40 @@ App = {
     $('#checkSolutionButton').click(App.checkSolution);
   },
 
+  initCTFManagerInstance: function(myCallback){
+
+    web3.eth.getAccounts(async function(error, accounts) {
+        if (error) {
+          console.log(error);
+        }
+        var account = accounts[0];
+        var instance = await App.contracts.CTFManager.deployed().then(async function(instance) {
+          return instance;
+      });
+      myCallback(account, instance);
+    });
+
+  },
+
+  initLotteryChallengeInstance: function(address, myCallback){
+
+    web3.eth.getAccounts(async function(error, accounts) {
+        if (error) {
+          console.log(error);
+        }
+        var account = accounts[0];
+        var instance = await App.contracts.LotteryChallenge.at(address).then(async function(instance) {
+          return instance;
+      });
+      myCallback(account, instance);
+    });
+
+  },
+
   getChallenge: function(challengeId){
-    var CTFManagerInstance;
 
-    web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-
-      var account = accounts[0];
-
-      App.contracts.CTFManager.deployed().then(function(instance) {
-          CTFManagerInstance = instance;
-    
-      return CTFManagerInstance.getChallenge(challengeId, {from: account})
-      }).then(function(challenge){
-        
+    App.initCTFManagerInstance(function (account, CTFManagerInstance){
+      CTFManagerInstance.getChallenge(challengeId, {from: account}).then(function(challenge){
         // Check which challenges the user has deployed
         if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
           $('#contractAddressLink').text(challenge[0]);
@@ -89,8 +107,6 @@ App = {
             App.isComplete();
       
           });
-
-
         } else {
           console.log('Contract is not deployed');
         }
@@ -102,20 +118,8 @@ App = {
 
   isComplete: function() {
 
-    var lotteryInstance;
-
-    web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-
-      var account = accounts[0];
-
-      App.contracts.LotteryChallenge.at(App.challengeAddr).then(function(instance) {
-        lotteryInstance = instance;
-
-        return lotteryInstance.isComplete({from: account});
-      }).then(function(complete) {
+    App.initLotteryChallengeInstance(App.challengeAddr, function (account, lotteryInstance){
+      lotteryInstance.isComplete({from: account}).then(function(complete) {
           if (complete){
             $('#isCompleted').text('Challenge is completed!')
           } else {
@@ -128,27 +132,13 @@ App = {
   },
 
   guess: function(event) {
+
     event.preventDefault();
-
     var n = parseInt($('#guess-input').val())
-
     console.log('n = ' + n);
 
-    var lotteryInstance;
-
-    web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-
-      var account = accounts[0];
-
-      App.contracts.LotteryChallenge.at(App.challengeAddr).then(function(instance) {
-        lotteryInstance = instance;
-
-        // Execute as a transaction by sending account
-        return lotteryInstance.guess(n, {value: "1000000000000000000", from: account});
-      }).then(function(result) {
+    App.initLotteryChallengeInstance(App.challengeAddr, function (account, lotteryInstance){
+      lotteryInstance.guess(n, {value: "1000000000000000000", from: account}).then(function(result) {
         console.log('number introduced: ' + n);
       }).catch(function(err) {
         console.log(err.message);
@@ -160,21 +150,15 @@ App = {
 
     event.preventDefault();
 
-    web3.eth.getAccounts(function(error, accounts) {
-
-      account = accounts[0];
-
-      App.contracts.CTFManager.deployed().then(function(instance) {
-        CTFManagerInstance = instance;
-        // Mark challenge as completed!
-        return CTFManagerInstance.checkChallenge(1, {from: account})
-      }).then(function(solved) { console.log(solved); if(solved === true){ window.location.replace("index.html"); } });
-      if (error) {
-        console.log(error);
-      }
+    App.initCTFManagerInstance(function (account, CTFManagerInstance){
+        CTFManagerInstance.checkChallenge(1, {from: account}).then(function(solved) {
+          console.log(solved);
+          if(solved === true){
+            window.location.replace("index.html");
+          }
+        });
     });
   }
-
 };
 
 $(function() {

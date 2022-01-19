@@ -39,20 +39,12 @@ App = {
       
         // Set the provider for our contract
         App.contracts.CTFManager.setProvider(App.web3Provider);
-      
-        // Initialize Hidden Buttons
+
+        // Initialize UI with user info
         App.initInterface();
 
-        // Use our contract to retrieve the username
-        App.getUsername();
-
-        // Check wether the user challenges are completed or not
-        for (let i = 1; i <= 4; i++) {
-          App.getChallenge(i);
-        }
-
       });
-  
+
       return App.bindEvents();
     },
   
@@ -63,75 +55,75 @@ App = {
     },
 
     initInterface: function() {
+      // Use our contract to retrieve the username
+      App.getUsername();
+      // Hide all play buttons by default
       $('.play-buttons').hide();
+      // Check wether the user challenges are completed or not and show play buttons accordingly
+      for (let i = 1; i <= 4; i++) {
+        App.getChallenge(i);
+      }
+    },
+
+    initCTFManagerInstance: function(myCallback){
+
+      web3.eth.getAccounts(async function(error, accounts) {
+          if (error) {
+            console.log(error);
+          }
+          var account = accounts[0];
+          var instance = await App.contracts.CTFManager.deployed().then(async function(instance) {
+            return instance;
+        });
+        myCallback(account, instance);
+      });
+
+    },
+
+    initLotteryChallengeInstance: function(myCallback){
+
+      web3.eth.getAccounts(async function(error, accounts) {
+          if (error) {
+            console.log(error);
+          }
+          var account = accounts[0];
+          var instance = await App.contracts.LotteryChallenge.deployed().then(async function(instance) {
+            return instance;
+        });
+        myCallback(account, instance);
+      });
+
     },
 
     createUser: function(event) {
 
         event.preventDefault();
-    
         var username = $('#username-input').val()
     
-        var CTFManagerInstance;
-    
-        web3.eth.getAccounts(function(error, accounts) {
-          if (error) {
-            console.log(error);
-          }
-    
-          var account = accounts[0];
-    
-          App.contracts.CTFManager.deployed().then(function(instance) {
-            CTFManagerInstance = instance;
-    
-            // Execute as a transaction by sending account
-            return CTFManagerInstance.createUser(username, {from: account});
-          }).then(function(result) {
-            location.reload();
-          }).catch(function(err) {
-            console.log(err.message);
-          });
+        App.initCTFManagerInstance(function (account, CTFManagerInstance){
+            CTFManagerInstance.createUser(username, {from: account}).then(function(result) {
+              location.reload();
+            }).catch(function(err) {
+              console.log(err.message);
+            });
         });
       },
 
     getUsername: function() {
-        var CTFManagerInstance;
 
-        web3.eth.getAccounts(function(error, accounts) {
-          if (error) {
-            console.log(error);
-          }
-    
-          var account = accounts[0];
-
-          App.contracts.CTFManager.deployed().then(function(instance) {
-              CTFManagerInstance = instance;
-          
-          return CTFManagerInstance.getUsername({from: account});
-          }).then(function(username) {
-              $('#username').text(username)
-          }).catch(function(err) {
-          console.log(err.message);
-          });
+      App.initCTFManagerInstance(function (account, CTFManagerInstance){
+        CTFManagerInstance.getUsername({from: account}).then(function(username) {
+          $('#username').text(username)
+        }).catch(function(err) {
+            console.log(err.message);
         });
+      });
     },
 
     getChallenge: function(challengeId){
-      var CTFManagerInstance;
-
-      web3.eth.getAccounts(function(error, accounts) {
-        if (error) {
-          console.log(error);
-        }
-  
-          var account = accounts[0];
-
-          App.contracts.CTFManager.deployed().then(function(instance) {
-              CTFManagerInstance = instance;
-        
-        return CTFManagerInstance.getChallenge(challengeId, {from: account})
-        }).then(function(challenge){
-
+      
+      App.initCTFManagerInstance(function (account, CTFManagerInstance){
+        CTFManagerInstance.getChallenge(challengeId, {from: account}).then(function(challenge){
           // Check which challenges the user has deployed
           if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
             switch(challengeId){
@@ -162,24 +154,21 @@ App = {
             }
           }
         }).catch(function(err) {
-          console.log(err.message);
+            console.log(err.message);
         });
       });
     },
 
-    addChallenge: function(challengeId, challengeAddr, account){
-      var CTFManagerInstance;
+    addChallenge: function(challengeId, challengeAddr){
 
-      App.contracts.CTFManager.deployed().then(function(instance) {
-          CTFManagerInstance = instance;
-
-          return CTFManagerInstance.addChallenge(challengeId, challengeAddr, {from: account});
-        }).then(function() {
+      App.initCTFManagerInstance(function (account, CTFManagerInstance){
+          CTFManagerInstance.addChallenge(challengeId, challengeAddr, {from: account}).then(function() {
             console.log('challenge ' + challengeId + ' deployed at: ' + challengeAddr);
             location.reload();
         }).catch(function(err) {
             console.log(err.message);
         });
+      });
     },
 
     deployLottery: function(){
@@ -192,19 +181,11 @@ App = {
         // Set the provider for our contract
         App.contracts.LotteryChallenge.setProvider(App.web3Provider);
 
-        // Get user accounts
-        web3.eth.getAccounts(function(error, accounts) {
-            if (error) {
-              console.log(error);
-            }
-      
-            var account = accounts[0];
-
+        App.initLotteryChallengeInstance(function (account, LotteryChallengeInstance){
             // Generate new contract in the provider network.
             App.contracts.LotteryChallenge.new({from: account, value: "1000000000000000000"}).then((newContract) => {
-              App.addChallenge(1, newContract.address, account);
+              App.addChallenge(1, newContract.address);
             });
-            
         });
       });
     }
