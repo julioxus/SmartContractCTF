@@ -126,32 +126,12 @@ App = {
         CTFManagerInstance.getChallenge(challengeId, {from: account}).then(function(challenge){
           // Check which challenges the user has deployed
           if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
-            switch(challengeId){
-              case 1: 
-                $('#challenge1-play').show();
-                $('#challenge1-deploy').hide();
-                // Mark the challenge when completed
-                if (challenge[1] === true) { $('#challenge1-status').text('COMPLETED!!!') };
-                break;
-              case 2:
-                $('#challenge2-play').show();
-                $('#challenge2-deploy').hide();
-                // Mark the challenge when completed
-                if (challenge[1] === true) { $('#challenge2-status').text('COMPLETED!!!') };
-                break;
-              case 3:
-                $('#challenge3-play').show();
-                $('#challenge3-deploy').hide();
-                // Mark the challenge when completed
-                if (challenge[1] === true) { $('#challenge3-status').text('COMPLETED!!!') };
-                break;
-              case 4:
-                $('#challenge4-play').show();
-                $('#challenge4-deploy').hide();
-                // Mark the challenge when completed
-                if (challenge[1] === true) { $('#challenge4-status').text('COMPLETED!!!') };
-                break;
-            }
+            // Show play button instead of deploy if the challenge is deployed
+            $('#challenge'+challengeId+'-play').show();
+            $('#challenge'+challengeId+'-deploy').hide();
+            
+            // Mark the challenge when completed
+            if (challenge[1] === true) { $('#challenge'+challengeId+'-status').text('COMPLETED!!!') };
           }
         }).catch(function(err) {
             console.log(err.message);
