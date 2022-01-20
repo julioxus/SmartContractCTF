@@ -10,9 +10,9 @@ module.exports = {
       port: 7545,
       network_id: "*" // Match any network id
     },
-    develop: {
+    /*develop: {
       port: 8545
-    }, 
+    }, */
     ropsten: {
       provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${projectId}`),
       network_id: 3,       // Ropsten's id

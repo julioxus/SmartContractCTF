@@ -4,6 +4,10 @@ interface LotteryChallenge {
     function isComplete() external view returns (bool);
 }
 
+interface TokenSaleChallenge {
+    function isComplete() external view returns (bool);
+}
+
 contract CTFManager {
 
     // Define challenge struct
@@ -60,7 +64,12 @@ contract CTFManager {
 
     // Check Challenge Solution
     function checkChallenge(uint8 challengeId) public returns (bool) {
-        bool solved = LotteryChallenge(ctfUsers[msg.sender].challenges[challengeId].addr).isComplete();
+        bool solved = false;
+        if(challengeId == 1){
+            solved = LotteryChallenge(ctfUsers[msg.sender].challenges[challengeId].addr).isComplete();
+        } else if (challengeId == 2){
+            solved = TokenSaleChallenge(ctfUsers[msg.sender].challenges[challengeId].addr).isComplete();
+        }
         ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         return solved;
     }

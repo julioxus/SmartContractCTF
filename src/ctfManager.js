@@ -86,6 +86,35 @@ App = {
 
     },
 
+    initLotteryChallengeInstance: function(myCallback){
+
+      web3.eth.getAccounts(async function(error, accounts) {
+          if (error) {
+            console.log(error);
+          }
+          var account = accounts[0];
+          var instance = await App.contracts.LotteryChallenge.deployed().then(async function(instance) {
+            return instance;
+        });
+        myCallback(account, instance);
+      });
+
+    },
+
+    initTokenSaleChallengeInstance: function(myCallback){
+
+      web3.eth.getAccounts(async function(error, accounts) {
+          if (error) {
+            console.log(error);
+          }
+          var account = accounts[0];
+          var instance = await App.contracts.TokenSaleChallenge.deployed().then(async function(instance) {
+            return instance;
+        });
+        myCallback(account, instance);
+      });
+
+    },
     createUser: function(event) {
 
         event.preventDefault();
@@ -152,11 +181,7 @@ App = {
         // Set the provider for our contract
         App.contracts.LotteryChallenge.setProvider(App.web3Provider);
 
-        web3.eth.getAccounts(async function(error, accounts) {
-          if (error) {
-            console.log(error);
-          }
-          var account = accounts[0];
+        App.initLotteryChallengeInstance(function (account, LotteryChallengeInstance){
             // Generate new contract in the provider network.
             App.contracts.LotteryChallenge.new({from: account, value: "1000000000000000000"}).then((newContract) => {
               App.addChallenge(1, newContract.address);
@@ -175,13 +200,9 @@ App = {
         // Set the provider for our contract
         App.contracts.TokenSaleChallenge.setProvider(App.web3Provider);
 
-        web3.eth.getAccounts(async function(error, accounts) {
-          if (error) {
-            console.log(error);
-          }
-          var account = accounts[0];
+        App.initTokenSaleChallengeInstance(function (account, TokenSaleChallengeInstance){
             // Generate new contract in the provider network.
-            App.contracts.TokenSaleChallenge.new({from: account, value: "1000000000000000000"}).then((newContract) => {
+            App.contracts.LotteryChallenge.new({from: account, value: "1000000000000000000"}).then((newContract) => {
               App.addChallenge(2, newContract.address);
             });
         });
