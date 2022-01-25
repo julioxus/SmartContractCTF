@@ -32,7 +32,7 @@ App = {
     },
   
     initContract: function() {
-      $.getJSON('CTFManager.json', function(data) {
+      $.getJSON('artifacts/CTFManager.json', function(data) {
         // Get the necessary contract artifact file and instantiate it with @truffle/contract
         var CTFManagerArtifact = data;
         App.contracts.CTFManager = TruffleContract(CTFManagerArtifact);
@@ -143,7 +143,7 @@ App = {
     },
 
     deployLottery: function(){
-      $.getJSON('LotteryChallenge.json', function(data) {
+      $.getJSON('artifacts/LotteryChallenge.json', function(data) {
 
         // Get the necessary contract artifact file and instantiate it with @truffle/contract
         var LotteryChallengeArtifact = data;
@@ -166,7 +166,7 @@ App = {
     },
 
     deployTokenSale: function(){
-      $.getJSON('TokenSaleChallenge.json', function(data) {
+      $.getJSON('artifacts/TokenSaleChallenge.json', function(data) {
 
         // Get the necessary contract artifact file and instantiate it with @truffle/contract
         var TokenSaleChallengeArtifact = data;

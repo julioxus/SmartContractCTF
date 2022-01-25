@@ -34,7 +34,7 @@ App = {
 
   initContract: function() {
 
-    $.getJSON('CTFManager.json', function(data) {
+    $.getJSON('artifacts/CTFManager.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with @truffle/contract
       var CTFManagerArtifact = data;
       App.contracts.CTFManager = TruffleContract(CTFManagerArtifact);
@@ -94,7 +94,7 @@ App = {
           $('#contractAddressLink').text(challenge[0]);
           $('#contractAddressLink').attr("href", 'https://ropsten.etherscan.io/address/' + challenge[0]);
           
-          $.getJSON('LotteryChallenge.json', function(data) {
+          $.getJSON('artifacts/LotteryChallenge.json', function(data) {
             // Get the necessary contract artifact file and instantiate it with @truffle/contract
             var LotteryChallengeArtifact = data;
             App.contracts.LotteryChallenge = TruffleContract(LotteryChallengeArtifact);
@@ -138,8 +138,9 @@ App = {
     console.log('n = ' + n);
 
     App.initLotteryChallengeInstance(App.challengeAddr, function (account, lotteryInstance){
-      lotteryInstance.guess(n, {value: "1000000000000000000", from: account}).then(function(result) {
+      lotteryInstance.guess(n, {value: n, from: account}).then(function(result) {
         console.log('number introduced: ' + n);
+        location.reload();
       }).catch(function(err) {
         console.log(err.message);
       });
