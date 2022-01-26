@@ -101,30 +101,21 @@ App = {
           
             // Set the provider for our contract
             App.contracts.LotteryChallenge.setProvider(App.web3Provider);
-          
-            // Use our contract to retrieve if the challenge is complete
+            
+            // Save challenge address
             App.challengeAddr = challenge[0];
-            App.isComplete();
-      
+
+            // Check if the challenge is complete
+            const complete = challenge[1];
+            if (complete){
+              $('#isCompleted').text('Challenge is completed!')
+            } else {
+              $('#isCompleted').text('Challenge is NOT completed!')
+            }
           });
         } else {
           console.log('Contract is not deployed');
         }
-      }).catch(function(err) {
-        console.log(err.message);
-      });
-    });
-  },
-
-  isComplete: function() {
-
-    App.initLotteryChallengeInstance(App.challengeAddr, function (account, lotteryInstance){
-      lotteryInstance.isComplete({from: account}).then(function(complete) {
-          if (complete){
-            $('#isCompleted').text('Challenge is completed!')
-          } else {
-            $('#isCompleted').text('Challenge is NOT completed!')
-          }
       }).catch(function(err) {
         console.log(err.message);
       });
@@ -152,15 +143,11 @@ App = {
     event.preventDefault();
 
     App.initCTFManagerInstance(function (account, CTFManagerInstance){
-        CTFManagerInstance.getChallenge(1, {from: account}).then(function(challenge) {
-          const solved = challenge[1];
-          if(solved){
-            alert("Congrats! Challenge Completed! :)");
-            window.location.replace("index.html");
-          } else {
-            alert("Challenge NOT completed :(");
-          }
-        });
+      CTFManagerInstance.solveChallenge(1, {from: account}).then(function() {
+        location.reload();
+      }).catch(function(err) {
+        console.log(err.message);
+      });
     });
   }
 };

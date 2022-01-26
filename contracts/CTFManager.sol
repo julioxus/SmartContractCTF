@@ -61,5 +61,15 @@ contract CTFManager {
             ctfUsers[msg.sender].challenges[challengeId].solved
         );
     }
+
+    function solveChallenge(uint8 challengeId) public {
+        address challengeAddr = ctfUsers[msg.sender].challenges[challengeId].addr;
+
+        if(challengeId == 1){
+            ctfUsers[msg.sender].challenges[challengeId].solved = LotteryChallenge(challengeAddr).isComplete();
+        } else if (challengeId == 2){
+            ctfUsers[msg.sender].challenges[challengeId].solved = TokenSaleChallenge(challengeAddr).isComplete();
+        }
+    }
     
 }
