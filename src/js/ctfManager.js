@@ -104,7 +104,7 @@ App = {
 
       App.initCTFManagerInstance(function (account, CTFManagerInstance){
         CTFManagerInstance.getUsername({from: account}).then(function(username) {
-          $('#username').text(username)
+          $('#username').text('Welcome back, ' + username + '!');
         }).catch(function(err) {
             console.log(err.message);
         });

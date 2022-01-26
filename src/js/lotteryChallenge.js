@@ -138,7 +138,7 @@ App = {
     console.log('n = ' + n);
 
     App.initLotteryChallengeInstance(App.challengeAddr, function (account, lotteryInstance){
-      lotteryInstance.guess(n, {value: n, from: account}).then(function(result) {
+      lotteryInstance.guess(n, {value: '1000000000000000000', from: account}).then(function(result) {
         console.log('number introduced: ' + n);
         location.reload();
       }).catch(function(err) {
@@ -152,10 +152,13 @@ App = {
     event.preventDefault();
 
     App.initCTFManagerInstance(function (account, CTFManagerInstance){
-        CTFManagerInstance.checkChallenge(1, {from: account}).then(function(solved) {
-          console.log(solved);
-          if(solved === true){
+        CTFManagerInstance.getChallenge(1, {from: account}).then(function(challenge) {
+          const solved = challenge[1];
+          if(solved){
+            alert("Congrats! Challenge Completed! :)");
             window.location.replace("index.html");
+          } else {
+            alert("Challenge NOT completed :(");
           }
         });
     });

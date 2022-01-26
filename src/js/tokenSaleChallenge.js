@@ -179,12 +179,15 @@ App = {
       event.preventDefault();
   
       App.initCTFManagerInstance(function (account, CTFManagerInstance){
-          CTFManagerInstance.checkChallenge(2, {from: account}).then(function(solved) {
-            console.log(solved);
-            if(solved === true){
-              window.location.replace("index.html");
-            }
-          });
+        CTFManagerInstance.getChallenge(2, {from: account}).then(function(challenge) {
+          const solved = challenge[1];
+          if(solved){
+            alert("Congrats! Challenge Completed! :)");
+            window.location.replace("index.html");
+          } else {
+            alert("Challenge NOT completed :(");
+          }
+        });
       });
     }
 };
