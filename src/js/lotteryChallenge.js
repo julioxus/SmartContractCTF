@@ -112,6 +112,9 @@ App = {
             } else {
               $('#isCompleted').text('Challenge is NOT completed!')
             }
+
+            App.getBalance();
+
           });
         } else {
           console.log('Contract is not deployed');
@@ -119,6 +122,12 @@ App = {
       }).catch(function(err) {
         console.log(err.message);
       });
+    });
+  },
+
+  getBalance: function(){
+    web3.eth.getBalance(App.challengeAddr, function(err, contractBalance){
+      $('#contract-balance-text').text('Contract balance: ' + contractBalance / 10**18 + ' ether');
     });
   },
 

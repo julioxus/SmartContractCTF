@@ -125,10 +125,13 @@ App = {
     getBalance: function(){
       App.initTokenSaleChallengeInstance(App.challengeAddr, function (account, tokenSaleInstance){
         tokenSaleInstance.balanceOf(account).then(function(result){
-          const balance = result.c[0];
-          $('#balance-text').text('My current token balance: ' + balance);
+          const userBalance = result.c[0];
+          $('#user-balance-text').text('My current token balance: ' + userBalance + ' ether');
         }).catch(function(err) {
           console.log(err.message);
+        });
+        web3.eth.getBalance(App.challengeAddr, function(err, contractBalance){
+          $('#contract-balance-text').text('Contract balance: ' + contractBalance / 10**18 + ' ether');
         });
       });
     },
