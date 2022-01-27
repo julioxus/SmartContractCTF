@@ -1,5 +1,5 @@
 {
     "solidity.compileUsingRemoteVersion": "v0.4.22+commit.4cb486ee",
-    "solidity.defaultCompiler": "localFile",
+    "solidity.defaultCompiler": "remote",
     "solidity.compileUsingLocalVersion": "/home/julioxus/SmartContractCTF/soljson-v0.4.22+commit.4cb486ee.js"
 }

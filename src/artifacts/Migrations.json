@@ -50,7 +50,7 @@
   "sourceMap": "66:352:3:-;;;113:10;90:33;;;;;;;;;;;;;;;;;;;;66:352;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:352:3;;;;;;;",
   "deployedSourceMap": "66:352:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;127:36;;8:9:-1;5:2;;;30:1;27;20:12;5:2;127:36:3;;;;;;;;;;;;;;;;;;;;;;;90:33;;8:9:-1;5:2;;;30:1;27;20:12;5:2;90:33:3;;;;;;;;;;;;;;;;;;;;;;;;;;;313:103;;8:9:-1;5:2;;;30:1;27;20:12;5:2;313:103:3;;;;;;;;;;;;;;;;;;;;;;;;;;127:36;;;;:::o;90:33::-;;;;;;;;;;;;;:::o;313:103::-;225:5;;;;;;;;;;;211:19;;:10;:19;;;196:101;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;402:9;375:24;:36;;;;313:103;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.8.0;\n\ncontract Migrations {\n  address public owner = msg.sender;\n  uint public last_completed_migration;\n\n  modifier restricted() {\n    require(\n      msg.sender == owner,\n      \"This function is restricted to the contract's owner\"\n    );\n    _;\n  }\n\n  function setCompleted(uint completed) public restricted {\n    last_completed_migration = completed;\n  }\n}\n",
-  "sourcePath": "/home/julioxus/SmartContractCTF/contracts/Migrations.sol",
+  "sourcePath": "C:\\Users\\juli-\\CTF Blockchain\\SmartContractCTF\\contracts\\Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -913,12 +913,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x0B916d8A57D625f6422c44eAd43b8A1b3f0d6aE0",
-      "transactionHash": "0xf2fd02e2c6995783f0ff0b1a984c0bb12e88eb38e56ca9406c2f0a8a3b3a542d"
+      "address": "0xB997F7aF0F3f78909F1015B2D011051b12da7cae",
+      "transactionHash": "0x52d947a64fdc50f619a4ba69f4a235f6196ed0e051ea3b76df92be4aa09018e7"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-27T15:23:51.652Z",
+  "updatedAt": "2022-01-27T18:29:12.598Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
