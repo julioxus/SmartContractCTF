@@ -1,12 +1,8 @@
 pragma solidity ^0.4.21;
 
-interface LotteryChallenge {
-    function isComplete() external view returns (bool);
-}
-
-interface TokenSaleChallenge {
-    function isComplete() external view returns (bool);
-}
+import "./LotteryChallenge.sol";
+import "./TokenSaleChallenge.sol";
+import "./RetirementFundChallenge.sol";
 
 contract CTFManager {
 
@@ -43,9 +39,23 @@ contract CTFManager {
         return ctfUsers[msg.sender].username;
     }
 
-    // Add challenge to user
-    function addChallenge(uint8 challengeId, address challengeAddr) public {
-        ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:challengeAddr, solved:false});
+    // Deploy a new challenge for the user
+    function deployChallenge(uint8 challengeId) public payable {
+        require(msg.value == 1 ether);
+        require(challengeId > 0 && challengeId < 5);
+
+        if(challengeId == 1){
+            LotteryChallenge lotteryInstance = (new LotteryChallenge).value(1 ether)();
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(lotteryInstance), solved:false});
+        } else if (challengeId == 2){
+            TokenSaleChallenge tokenSaleInstance = (new TokenSaleChallenge).value(1 ether)();
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(tokenSaleInstance), solved:false});
+        } else if (challengeId == 3){
+            RetirementFundChallenge retirementFundInstance = (new RetirementFundChallenge).value(1 ether)(msg.sender);
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(retirementFundInstance), solved:false});
+        } else if (challengeId == 4){
+
+        }
         
     }
 
@@ -69,6 +79,10 @@ contract CTFManager {
             ctfUsers[msg.sender].challenges[challengeId].solved = LotteryChallenge(challengeAddr).isComplete();
         } else if (challengeId == 2){
             ctfUsers[msg.sender].challenges[challengeId].solved = TokenSaleChallenge(challengeAddr).isComplete();
+        } else if (challengeId == 3){
+            ctfUsers[msg.sender].challenges[challengeId].solved = RetirementFundChallenge(challengeAddr).isComplete();
+        } else if (challengeId == 4){
+            //ctfUsers[msg.sender].challenges[challengeId].solved = AccountTakeOverChallenge(challengeAddr).isComplete();
         }
     }
     

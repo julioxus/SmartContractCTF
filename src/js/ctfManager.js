@@ -58,6 +58,10 @@ App = {
         //Challenge 2 deploy
         $('#challenge2-deploy').click(App.deployTokenSale);
         $('#challenge2-button').click(function(){window.location.replace("token-sale.html")});
+
+        //Challenge 3 deploy
+        $('#challenge3-deploy').click(App.deployRetirementFund);
+        $('#challenge3-button').click(function(){window.location.replace("retirement-fund.html")});
     },
 
     initInterface: function() {
@@ -132,11 +136,10 @@ App = {
       });
     },
 
-    addChallenge: function(challengeId, challengeAddr){
+    deployChallenge: function(challengeId){
 
       App.initCTFManagerInstance(function (account, CTFManagerInstance){
-          CTFManagerInstance.addChallenge(challengeId, challengeAddr, {from: account}).then(function() {
-            console.log('challenge ' + challengeId + ' deployed at: ' + challengeAddr);
+          CTFManagerInstance.deployChallenge(challengeId, {from: account, value:'1000000000000000000'}).then(function() {
             location.reload();
         }).catch(function(err) {
             console.log(err.message);
@@ -145,50 +148,17 @@ App = {
     },
 
     deployLottery: function(){
-      $.getJSON('artifacts/LotteryChallenge.json', function(data) {
-
-        // Get the necessary contract artifact file and instantiate it with @truffle/contract
-        var LotteryChallengeArtifact = data;
-        App.contracts.LotteryChallenge = TruffleContract(LotteryChallengeArtifact);
-
-        // Set the provider for our contract
-        App.contracts.LotteryChallenge.setProvider(App.web3Provider);
-
-        web3.eth.getAccounts(async function(error, accounts) {
-          if (error) {
-            console.log(error);
-          }
-          var account = accounts[0];
-            // Generate new contract in the provider network.
-            App.contracts.LotteryChallenge.new({from: account, value: "1000000000000000000"}).then((newContract) => {
-              App.addChallenge(1, newContract.address);
-            });
-        });
-      });
+      App.deployChallenge(1);
     },
 
     deployTokenSale: function(){
-      $.getJSON('artifacts/TokenSaleChallenge.json', function(data) {
+      App.deployChallenge(2);
+    },
 
-        // Get the necessary contract artifact file and instantiate it with @truffle/contract
-        var TokenSaleChallengeArtifact = data;
-        App.contracts.TokenSaleChallenge = TruffleContract(TokenSaleChallengeArtifact);
-
-        // Set the provider for our contract
-        App.contracts.TokenSaleChallenge.setProvider(App.web3Provider);
-
-        web3.eth.getAccounts(async function(error, accounts) {
-          if (error) {
-            console.log(error);
-          }
-          var account = accounts[0];
-            // Generate new contract in the provider network.
-            App.contracts.TokenSaleChallenge.new({from: account, value: "1000000000000000000"}).then((newContract) => {
-              App.addChallenge(2, newContract.address);
-            });
-        });
-      });
+    deployRetirementFund: function(){
+      App.deployChallenge(3);
     }
+
 };
 
 $(function() {
