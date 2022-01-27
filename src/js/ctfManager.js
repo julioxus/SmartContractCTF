@@ -53,15 +53,19 @@ App = {
 
         // Challenge 1 deploy
         $('#challenge1-deploy').click(App.deployLottery);
-        $('#challenge1-button').click(function(){window.location.replace("lottery.html")});
+        $('#challenge1-button').click(function(){window.location.href = "./lottery.html"});
 
-        //Challenge 2 deploy
+        // Challenge 2 deploy
         $('#challenge2-deploy').click(App.deployTokenSale);
-        $('#challenge2-button').click(function(){window.location.replace("token-sale.html")});
+        $('#challenge2-button').click(function(){window.location.href = "./token-sale.html"});
 
-        //Challenge 3 deploy
+        // Challenge 3 deploy
         $('#challenge3-deploy').click(App.deployRetirementFund);
-        $('#challenge3-button').click(function(){window.location.replace("retirement-fund.html")});
+        $('#challenge3-button').click(function(){window.location.href = "./retirement-fund.html"});
+
+        // Challenge 4 deploy
+        $('#challenge4-deploy').click(App.deployAccountTakeover);
+        $('#challenge4-button').click(function(){window.location.href = "./account-takeover.html"});
     },
 
     initInterface: function() {
@@ -139,11 +143,19 @@ App = {
     deployChallenge: function(challengeId){
 
       App.initCTFManagerInstance(function (account, CTFManagerInstance){
+        if(challengeId < 4){
           CTFManagerInstance.deployChallenge(challengeId, {from: account, value:'1000000000000000000'}).then(function() {
             location.reload();
         }).catch(function(err) {
             console.log(err.message);
         });
+        } else {
+          CTFManagerInstance.deployChallenge(challengeId, {from: account}).then(function() {
+            location.reload();
+          }).catch(function(err){
+            console.log(err.message);
+          });
+        }
       });
     },
 
@@ -157,8 +169,11 @@ App = {
 
     deployRetirementFund: function(){
       App.deployChallenge(3);
-    }
+    },
 
+    deployAccountTakeover: function(){
+      App.deployChallenge(4);
+    }
 };
 
 $(function() {

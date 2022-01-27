@@ -42,7 +42,7 @@ App = {
         App.contracts.CTFManager.setProvider(App.web3Provider);
 
         // Use our contract to retrieve the Challenge status
-        App.getChallenge(2);
+        App.getChallenge(4);
 
       });
 
@@ -50,8 +50,7 @@ App = {
     },
   
     bindEvents: function() {
-      $('#buy-form').submit(App.buy);
-      $('#sell-form').submit(App.sell);
+      $('#authenticate-button').click(App.authenticate);
       $('#checkSolutionButton').click(App.checkSolution);
     },
 
@@ -69,14 +68,14 @@ App = {
       });    
     },
 
-    initTokenSaleChallengeInstance: function(address, myCallback){
+    initAccountTakeoverChallengeInstance: function(address, myCallback){
 
       web3.eth.getAccounts(async function(error, accounts) {
           if (error) {
             console.log(error);
           }
           var account = accounts[0];
-          var instance = await App.contracts.TokenSaleChallenge.at(address).then(async function(instance) {
+          var instance = await App.contracts.AccountTakeoverChallenge.at(address).then(async function(instance) {
             return instance;
         });
         myCallback(account, instance);
@@ -91,13 +90,13 @@ App = {
             $('#contractAddressLink').text(challenge[0]);
             $('#contractAddressLink').attr("href", 'https://ropsten.etherscan.io/address/' + challenge[0]);
             
-            $.getJSON('artifacts/TokenSaleChallenge.json', function(data) {
+            $.getJSON('artifacts/AccountTakeoverChallenge.json', function(data) {
               // Get the necessary contract artifact file and instantiate it with @truffle/contract
-              var TokenSaleChallengeArtifact = data;
-              App.contracts.TokenSaleChallenge = TruffleContract(TokenSaleChallengeArtifact);
+              var AccountTakeoverChallengeArtifact = data;
+              App.contracts.AccountTakeoverChallenge = TruffleContract(AccountTakeoverChallengeArtifact);
             
               // Set the provider for our contract
-              App.contracts.TokenSaleChallenge.setProvider(App.web3Provider);
+              App.contracts.AccountTakeoverChallenge.setProvider(App.web3Provider);
             
               // Save challenge address
               App.challengeAddr = challenge[0];
@@ -109,8 +108,6 @@ App = {
               } else {
                 $('#isCompleted').text('Challenge is NOT completed!')
               }
-
-              App.getBalance();
         
             });
           } else {
@@ -122,47 +119,13 @@ App = {
       });
     },
 
-    getBalance: function(){
-      App.initTokenSaleChallengeInstance(App.challengeAddr, function (account, tokenSaleInstance){
-        tokenSaleInstance.balanceOf(account).then(function(result){
-          const userBalance = result.c[0];
-          $('#user-balance-text').text('My current balance: ' + userBalance + ' bank tokens');
-        }).catch(function(err) {
-          console.log(err.message);
-        });
-        web3.eth.getBalance(App.challengeAddr, function(err, contractBalance){
-          $('#contract-balance-text').text('Contract balance: ' + contractBalance / 10**18 + ' ether');
-        });
-      });
-    },
-
-    buy: function(event){
+    authenticate: function(event){
 
       event.preventDefault();
-      var n = parseInt($('#buy-input').val())
-      console.log('n = ' + n);
-      const tokenValue = n*10**18;
 
-
-      App.initTokenSaleChallengeInstance(App.challengeAddr, function (account, tokenSaleInstance){
-        tokenSaleInstance.buy(n, {from: account, value: tokenValue}).then(function(){
-          console.log('tokens buyed: ' + n);
-          location.reload();
-        }).catch(function(err) {
-          console.log(err.message);
-        });
-      });
-    },
-
-    sell: function(event){
-
-      event.preventDefault();
-      var n = parseInt($('#sell-input').val())
-      console.log('n = ' + n);
-
-      App.initTokenSaleChallengeInstance(App.challengeAddr, function (account, tokenSaleInstance){
-        tokenSaleInstance.sell(n, {from: account}).then(function(){
-          console.log('tokens sold: ' + n);
+      App.initAccountTakeoverChallengeInstance(App.challengeAddr, function (account, accountTakeoverInstance){
+        accountTakeoverInstance.authenticate({from: account}).then(function(){
+          console.log('Acces Granted');
           location.reload();
         }).catch(function(err) {
           console.log(err.message);
@@ -175,7 +138,7 @@ App = {
       event.preventDefault();
   
       App.initCTFManagerInstance(function (account, CTFManagerInstance){
-        CTFManagerInstance.solveChallenge(2, {from: account}).then(function() {
+        CTFManagerInstance.solveChallenge(4, {from: account}).then(function() {
           location.reload();
         }).catch(function(err) {
           console.log(err.message);
