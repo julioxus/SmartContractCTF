@@ -2466,7 +2466,11 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
+<<<<<<< HEAD
   "updatedAt": "2022-01-27T18:29:09.125Z",
+=======
+  "updatedAt": "2022-01-28T12:51:13.150Z",
+>>>>>>> 0a4dcce (trying bootstrap)
   "devdoc": {
     "methods": {}
   },

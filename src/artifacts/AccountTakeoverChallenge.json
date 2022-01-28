@@ -25,6 +25,7 @@
       "type": "function"
     }
   ],
+<<<<<<< HEAD
   "metadata": "{\"compiler\":{\"version\":\"0.4.22+commit.4cb486ee\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[],\"name\":\"authenticate\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isComplete\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/AccountTakeoverChallenge.sol\":\"AccountTakeoverChallenge\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/AccountTakeoverChallenge.sol\":{\"keccak256\":\"0xe1fd619b968b630edd0d504ce0b1cc1ea2911f7a8b8bf4ba39c8181db03d27c7\",\"urls\":[\"bzzr://a7fa1f472a75c493d5a81b2d80567c92347330230961c70c5a8fa41effdca422\"]}},\"version\":1}",
   "bytecode": "0x608060405273d26200f85703272e48edcc3400220b4f5662ed986000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555034801561006457600080fd5b5061014e806100746000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063380c7a6714610051578063b2fa1c9e14610068575b600080fd5b34801561005d57600080fd5b50610066610097565b005b34801561007457600080fd5b5061007d61010f565b604051808215151515815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156100f257600080fd5b6001600060146101000a81548160ff021916908315150217905550565b600060149054906101000a900460ff16815600a165627a7a7230582033711adbb65b9bf6cf23d2b482dacc590dcc4b4d32fea883fe44ad28546f15530029",
   "deployedBytecode": "0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063380c7a6714610051578063b2fa1c9e14610068575b600080fd5b34801561005d57600080fd5b50610066610097565b005b34801561007457600080fd5b5061007d61010f565b604051808215151515815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156100f257600080fd5b6001600060146101000a81548160ff021916908315150217905550565b600060149054906101000a900460ff16815600a165627a7a7230582033711adbb65b9bf6cf23d2b482dacc590dcc4b4d32fea883fe44ad28546f15530029",
@@ -32,6 +33,15 @@
   "deployedSourceMap": "28:248:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;165:108;;8:9:-1;5:2;;;30:1;27;20:12;5:2;165:108:0;;;;;;134:22;;8:9:-1;5:2;;;30:1;27;20:12;5:2;134:22:0;;;;;;;;;;;;;;;;;;;;;;;;;;;165:108;229:5;;;;;;;;;;;215:19;;:10;:19;;;207:28;;;;;;;;261:4;248:10;;:17;;;;;;;;;;;;;;;;;;165:108::o;134:22::-;;;;;;;;;;;;;:::o",
   "source": "pragma solidity ^0.4.21;\r\n\r\ncontract AccountTakeoverChallenge {\r\n    address owner = 0xD26200f85703272e48eDcC3400220B4f5662eD98;\r\n    bool public isComplete;\r\n\r\n    function authenticate() public {\r\n        require(msg.sender == owner);\r\n\r\n        isComplete = true;\r\n    }\r\n}",
   "sourcePath": "C:\\Users\\juli-\\CTF Blockchain\\SmartContractCTF\\contracts\\AccountTakeoverChallenge.sol",
+=======
+  "metadata": "{\"compiler\":{\"version\":\"0.4.22+commit.4cb486ee\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[],\"name\":\"authenticate\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isComplete\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/AccountTakeoverChallenge.sol\":\"AccountTakeoverChallenge\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/AccountTakeoverChallenge.sol\":{\"keccak256\":\"0xaa577e44144d4122ad573e694be0835762988fcd74a5646eba2b19e7cf0252c0\",\"urls\":[\"bzzr://50daad107ee651e41e59e6264f5e09391a77df7a0fa8e6ff8b1c00db0b336a30\"]}},\"version\":1}",
+  "bytecode": "0x608060405273883c9944e456c4cdd254300bee4c716be11e9adf6000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555034801561006457600080fd5b5061014e806100746000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063380c7a6714610051578063b2fa1c9e14610068575b600080fd5b34801561005d57600080fd5b50610066610097565b005b34801561007457600080fd5b5061007d61010f565b604051808215151515815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156100f257600080fd5b6001600060146101000a81548160ff021916908315150217905550565b600060149054906101000a900460ff16815600a165627a7a72305820f7f20f88341d09544435bda856de0b3f57a108b4352f36d25760b3206b42c5620029",
+  "deployedBytecode": "0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063380c7a6714610051578063b2fa1c9e14610068575b600080fd5b34801561005d57600080fd5b50610066610097565b005b34801561007457600080fd5b5061007d61010f565b604051808215151515815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156100f257600080fd5b6001600060146101000a81548160ff021916908315150217905550565b600060149054906101000a900460ff16815600a165627a7a72305820f7f20f88341d09544435bda856de0b3f57a108b4352f36d25760b3206b42c5620029",
+  "sourceMap": "26:239:0:-;;;82:42;66:58;;;;;;;;;;;;;;;;;;;;26:239;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:239:0;;;;;;;",
+  "deployedSourceMap": "26:239:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;159:104;;8:9:-1;5:2;;;30:1;27;20:12;5:2;159:104:0;;;;;;130:22;;8:9:-1;5:2;;;30:1;27;20:12;5:2;130:22:0;;;;;;;;;;;;;;;;;;;;;;;;;;;159:104;222:5;;;;;;;;;;;208:19;;:10;:19;;;200:28;;;;;;;;252:4;239:10;;:17;;;;;;;;;;;;;;;;;;159:104::o;130:22::-;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.21;\n\ncontract AccountTakeoverChallenge {\n    address owner = 0x883C9944e456C4cDd254300beE4C716bE11e9aDF;\n    bool public isComplete;\n\n    function authenticate() public {\n        require(msg.sender == owner);\n\n        isComplete = true;\n    }\n}",
+  "sourcePath": "/home/julioxus/SmartContractCTF/contracts/AccountTakeoverChallenge.sol",
+>>>>>>> 0a4dcce (trying bootstrap)
   "ast": {
     "absolutePath": "project:/contracts/AccountTakeoverChallenge.sol",
     "exportedSymbols": {
@@ -91,7 +101,7 @@
             },
             "value": {
               "argumentTypes": null,
-              "hexValue": "307844323632303066383537303332373265343865446343333430303232304234663536363265443938",
+              "hexValue": "307838383343393934346534353643346344643235343330306265453443373136624531316539614446",
               "id": 3,
               "isConstant": false,
               "isLValue": false,
@@ -105,7 +115,7 @@
                 "typeIdentifier": "t_address",
                 "typeString": "address"
               },
-              "value": "0xD26200f85703272e48eDcC3400220B4f5662eD98"
+              "value": "0x883C9944e456C4cDd254300beE4C716bE11e9aDF"
             },
             "visibility": "internal"
           },
@@ -397,7 +407,7 @@
               {
                 "attributes": {
                   "argumentTypes": null,
-                  "hexvalue": "307844323632303066383537303332373265343865446343333430303232304234663536363265443938",
+                  "hexvalue": "307838383343393934346534353643346344643235343330306265453443373136624531316539614446",
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": true,
@@ -405,7 +415,7 @@
                   "subdenomination": null,
                   "token": "number",
                   "type": "address",
-                  "value": "0xD26200f85703272e48eDcC3400220B4f5662eD98"
+                  "value": "0x883C9944e456C4cDd254300beE4C716bE11e9aDF"
                 },
                 "id": 3,
                 "name": "Literal",
@@ -675,7 +685,11 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
+<<<<<<< HEAD
   "updatedAt": "2022-01-27T18:29:09.088Z",
+=======
+  "updatedAt": "2022-01-28T12:51:13.122Z",
+>>>>>>> 0a4dcce (trying bootstrap)
   "devdoc": {
     "methods": {}
   },
