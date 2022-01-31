@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Challenges Board</title>
 
+    <link href="css/index.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,48 +29,50 @@
         </div>
       </div>
 
-        <form id='register-form'>
-          <div class="mb-3">
-            <label for='username-input' class="form-label">Enter your username:</label>
-            <input type="text" id='username-input' name='username-input' class="form-control">
-          </div>
-          <button class="register-button" type="submit" class="btn btn-primary">Sign Up!</button>
-        </form>
-
-      <p id='username'></p>
+      <div id='username' class="alert alert-success" role="alert"></div>
 
       <div id="challenges-container">
         <ul>
           <li>
-            <div id='challengeListItem'>
+            <div class='challengeListItem'>
               <p>Challenge 1</p>
-              <button id='challenge1-deploy' class='deploy-buttons'>Deploy</button>
-              <div id='challenge1-play' class='play-buttons'><button id='challenge1-button'>Play</button><p id='challenge1-status'>NOT COMPLETED</p></div>
+              <button id='challenge1-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
+              <div id='challenge1-play' class='play-buttons'><button id='challenge1-button' class='btn btn-success'>Play</button><p id='challenge1-status'>NOT COMPLETED</p></div>
             </div>
           </li>
           <li>
-            <div id='challengeListItem'>
+            <div class='challengeListItem'>
               <p>Challenge 2</p>
-              <button id='challenge2-deploy' class='deploy-buttons'>Deploy</button>
-              <div id='challenge2-play' class='play-buttons'><button id='challenge2-button'>Play</button><p id='challenge2-status'>NOT COMPLETED</p></div>
+              <button id='challenge2-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
+              <div id='challenge2-play' class='play-buttons'><button id='challenge2-button' class='btn btn-success'>Play</button><p id='challenge2-status'>NOT COMPLETED</p></div>
             </div>
           </li>
           <li>
-            <div id='challengeListItem'>
+            <div class='challengeListItem'>
               <p>Challenge 3</p>
-              <button id='challenge3-deploy' class='deploy-buttons'>Deploy</button>
-              <div id='challenge3-play' class='play-buttons'><button id='challenge3-button'>Play</button><p id='challenge3-status'>NOT COMPLETED</p></div>
+              <button id='challenge3-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
+              <div id='challenge3-play' class='play-buttons'><button id='challenge3-button' class='btn btn-success'>Play</button><p id='challenge3-status'>NOT COMPLETED</p></div>
             </div>
             <li>
-              <div id='challengeListItem'>
+              <div class='challengeListItem'>
                 <p>Challenge 4</p>
-                <button id='challenge4-deploy' class='deploy-buttons'>Deploy</button>
-                <div id='challenge4-play' class='play-buttons'><button id='challenge4-button'>Play</button><p id='challenge4-status'>NOT COMPLETED</p></div>
+                <button id='challenge4-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
+                <div id='challenge4-play' class='play-buttons'><button id='challenge4-button' class='btn btn-success'>Play</button><p id='challenge4-status'>NOT COMPLETED</p></div>
               </div>
             </li>
           </li>
         </ul>
       </div>
+
+      <form id='register-form'>
+        <div class="mb-3">
+          <label for='username-input' class="form-label">Enter your username:</label>
+          <input type="text" id='username-input' name='username-input' class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary register-button">Sign Up!</button>
+      </form>
+
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

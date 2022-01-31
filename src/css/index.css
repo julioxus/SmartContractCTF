@@ -1,0 +1,8 @@
+#username {
+    display: inline-block;
+}
+
+.challengeListItem {
+    display: inline;
+    background-color: black;
+}

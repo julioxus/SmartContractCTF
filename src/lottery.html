@@ -32,19 +32,24 @@
       </div>
 
       <div id="guess-form-container" class="row">
-      <form id='guess-form'>
-        <label for='guess-input'>Enter number:</label><br>
-        <input type="number" id='guess-input' name='guess-input' value=0><br>
-        <input class="guess-button" type="submit" data-id="0" value='Guess!'>
-      </form>
+        <form id='guess-form'>
+          <div class="mb-3"></div>
+            <label for='guess-input' class="form-label">Enter number:</label><br>
+            <input type="number" id='guess-input' name='guess-input' value=0 class="form-control">
+          </div>
+          <input class="btn btn-primary guess-button" type="submit" data-id="0" value='Guess!'>
+        </form>
+
+        <div id="info-container" class="row">
+          <div id="isCompleted" class="alert alert-danger"></div>
+          <div id="contract-deployed">Contract deployed at: <a id='contractAddressLink' href=''></a> </div>
+        </div>
+        <button id='checkSolutionButton' class="btn btn-success">Check Solution</button>
       </div>
 
-      <div id="info-container">
-        <p id="isCompleted"></p>
-        <p>Contract deployed at: <a id='contractAddressLink' href=''></a> </p>
       </div>
-      <button id='checkSolutionButton'>Check Solution</button>
-    </div>
+
+      
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
