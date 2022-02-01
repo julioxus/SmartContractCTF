@@ -29,33 +29,44 @@
         </div>
       </div>
 
-      <div id='username' class="alert alert-success" role="alert"></div>
+      <div id="header">
+        <div id='username' class="alert alert-success" role="alert"></div>
+        <div id="register-form-container">
+          <form id='register-form'>
+            <div class="mb-3">
+              <label for='username-input' class="form-label">Enter your username:</label>
+              <input type="text" id='username-input' name='username-input' class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary register-button">Set Username</button>
+          </form>
+        </div>
+      </div>
 
       <div id="challenges-container">
-        <ul>
-          <li>
+        <ul class="list-group">
+          <li class="list-group-item">
             <div class='challengeListItem'>
-              <p>Challenge 1</p>
+              <div class="challengeText">Challenge 1: Lottery</div>
               <button id='challenge1-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
               <div id='challenge1-play' class='play-buttons'><button id='challenge1-button' class='btn btn-success'>Play</button><p id='challenge1-status'>NOT COMPLETED</p></div>
             </div>
           </li>
-          <li>
+          <li class="list-group-item">
             <div class='challengeListItem'>
-              <p>Challenge 2</p>
+              <div class="challengeText">Challenge 2: Token Sale</div>
               <button id='challenge2-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
               <div id='challenge2-play' class='play-buttons'><button id='challenge2-button' class='btn btn-success'>Play</button><p id='challenge2-status'>NOT COMPLETED</p></div>
             </div>
           </li>
-          <li>
+          <li class="list-group-item">
             <div class='challengeListItem'>
-              <p>Challenge 3</p>
+              <div class="challengeText">Challenge 3: Retirement Fund</div>
               <button id='challenge3-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
               <div id='challenge3-play' class='play-buttons'><button id='challenge3-button' class='btn btn-success'>Play</button><p id='challenge3-status'>NOT COMPLETED</p></div>
             </div>
-            <li>
+            <li class="list-group-item">
               <div class='challengeListItem'>
-                <p>Challenge 4</p>
+                <div class="challengeText">Challenge 4: Account Takeover</div>
                 <button id='challenge4-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
                 <div id='challenge4-play' class='play-buttons'><button id='challenge4-button' class='btn btn-success'>Play</button><p id='challenge4-status'>NOT COMPLETED</p></div>
               </div>
@@ -63,14 +74,6 @@
           </li>
         </ul>
       </div>
-
-      <form id='register-form'>
-        <div class="mb-3">
-          <label for='username-input' class="form-label">Enter your username:</label>
-          <input type="text" id='username-input' name='username-input' class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary register-button">Sign Up!</button>
-      </form>
 
     </div>
 

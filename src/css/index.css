@@ -1,8 +1,39 @@
+#header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
 #username {
-    display: inline-block;
+    display: flex;
+    height: 60px;
+    align-items: center;
+}
+
+#register-form-container {
+    width: 400px;
+
 }
 
 .challengeListItem {
-    display: inline;
-    background-color: black;
+    display: flex;
+    
+}
+.challengeText {
+    display: flex;
+    font-weight: bold;
+    width: 250px;
+    max-height: 100%;
+    border-right: .5px solid;
+    align-items: center;
+    
+}
+
+.deploy-buttons {
+    margin-left: 20px;
+}
+
+.play-buttons {
+    margin-left: 20px;
+    display: flex;
 }
