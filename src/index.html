@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Challenges Board</title>
 
-    <link href="css/index.css" rel="stylesheet">
+    <link href="css/board.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,17 +20,17 @@
   </head>
   <body>
 
-    <div class="container">
+    <div id="header" class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <div id='title-container'class="col-xs-12 col-sm-8 col-sm-push-2">
           <h1 class="text-center">Challenges Board</h1>
           <hr/>
           <br/>
         </div>
       </div>
 
-      <div id="header">
-        <div id='username' class="alert alert-success" role="alert"></div>
+      <div id="subheader">
+        <div id='username' class="alert alert-success" role="alert">Welcome, anonymous participant!</div>
         <div id="register-form-container">
           <form id='register-form'>
             <div class="mb-3">
@@ -47,28 +47,32 @@
           <li class="list-group-item">
             <div class='challengeListItem'>
               <div class="challengeText">Challenge 1: Lottery</div>
+              <div class="challengeDescription">The Bank is offering a price for a lottery game. Would you be able to guess the winner number? You only need to pay 1 eth to participate!</div>
               <button id='challenge1-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
-              <div id='challenge1-play' class='play-buttons'><button id='challenge1-button' class='btn btn-success'>Play</button><p id='challenge1-status'>NOT COMPLETED</p></div>
+              <div id='challenge1-play' class='play-buttons'><button id='challenge1-button' class='btn btn-success'>Play</button><p id='challenge1-status' class=challenge-status>NOT COMPLETED</p></div>
             </div>
           </li>
           <li class="list-group-item">
             <div class='challengeListItem'>
               <div class="challengeText">Challenge 2: Token Sale</div>
+              <div class="challengeDescription">Don't you have Bank tokens yet? This coin will allow you to do a lot of things! Please, enter here to exchange eth for Bank Coins. (You need to pay 1 eth to use this service)</div>
               <button id='challenge2-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
-              <div id='challenge2-play' class='play-buttons'><button id='challenge2-button' class='btn btn-success'>Play</button><p id='challenge2-status'>NOT COMPLETED</p></div>
+              <div id='challenge2-play' class='play-buttons'><button id='challenge2-button' class='btn btn-success'>Play</button><p id='challenge2-status' class=challenge-status>NOT COMPLETED</p></div>
             </div>
           </li>
           <li class="list-group-item">
             <div class='challengeListItem'>
               <div class="challengeText">Challenge 3: Retirement Fund</div>
+              <div class="challengeDescription">If you want to invest your money in a safe place at Bank we offer a Retirement Fund service! You will be able to withdraw your money in 10 years!</div>
               <button id='challenge3-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
-              <div id='challenge3-play' class='play-buttons'><button id='challenge3-button' class='btn btn-success'>Play</button><p id='challenge3-status'>NOT COMPLETED</p></div>
+              <div id='challenge3-play' class='play-buttons'><button id='challenge3-button' class='btn btn-success'>Play</button><p id='challenge3-status' class=challenge-status>NOT COMPLETED</p></div>
             </div>
             <li class="list-group-item">
               <div class='challengeListItem'>
                 <div class="challengeText">Challenge 4: Account Takeover</div>
+                <div class="challengeDescription">WARNING! This is a restricted area! Only the Admin have access to it. Please, stay out of the way!</div>
                 <button id='challenge4-deploy' class='deploy-buttons btn btn-info'>Deploy</button>
-                <div id='challenge4-play' class='play-buttons'><button id='challenge4-button' class='btn btn-success'>Play</button><p id='challenge4-status'>NOT COMPLETED</p></div>
+                <div id='challenge4-play' class='play-buttons'><button id='challenge4-button' class='btn btn-success'>Play</button><p id='challenge4-status' class=challenge-status>NOT COMPLETED</p></div>
               </div>
             </li>
           </li>
