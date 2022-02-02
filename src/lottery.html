@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Lottery!</title>
 
-    <link href="css/lottery.css" rel="stylesheet">
+    <link href="css/challenge.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,34 +21,38 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <div id='title-container' class="col-xs-12 col-sm-8 col-sm-push-2">
           <h1 class="text-center">Lottery!</h1>
           <hr/>
           <br/>
+          <div id="subheader">
+            <div id='contract-balance-text' class="alert alert-primary" role="alert">Please, connect your wallet</div>
+          </div>
+          <div class="challengeDescription">The Bank is offering a price for a lottery game. Would you be able to guess the winner number? You only need to pay 1 eth to participate!</div>
         </div>
       </div>
 
-      <div>
-        <p id='contract-balance-text'></p>
-      </div>
+      <div id="challenge-body">
 
-      <div id="guess-form-container" class="row">
         <form id='guess-form'>
-          <div class="mb-3"></div>
+          <div class="mb-3">
             <label for='guess-input' class="form-label">Enter number:</label><br>
             <input type="number" id='guess-input' name='guess-input' value=0 class="form-control">
           </div>
-          <input class="btn btn-primary guess-button" type="submit" data-id="0" value='Guess!'>
+            <input class="btn btn-primary guess-button" type="submit" data-id="0" value='Guess!'>
         </form>
 
         <div id="info-container" class="row">
-          <div id="isCompleted" class="alert alert-danger"></div>
           <div id="contract-deployed">Contract deployed at: <a id='contractAddressLink' href=''></a> </div>
+          <div id="check-solution-container">
+            <button id='checkSolutionButton' class="btn btn-success">Check Solution</button>
+            <div id="isCompleted" class="alert alert-danger"></div>
+          </div>
         </div>
-        <button id='checkSolutionButton' class="btn btn-success">Check Solution</button>
-      </div>
 
       </div>
+      
+    </div>
 
       
 

@@ -1,0 +1,64 @@
+#title-container {
+    margin: auto;
+}
+
+#subheader {
+    margin: auto;
+    display: inline-block;
+}
+
+#challenge-body {
+    margin-top: 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#guess-form {
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#guess-input {
+    width: 80px;
+}
+
+#challenge-container {
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#info-container {
+    width: 650px;
+    height: 200px;
+    border: 1px solid #ccc;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#contract-deployed {
+
+}
+
+#check-solution-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+#checkSolutionButton {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+}

@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Retirement Fund!</title>
 
+    <link href="css/challenge.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,26 +21,33 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <div id='title-container' class="col-xs-12 col-sm-8 col-sm-push-2">
           <h1 class="text-center">Retirement Fund!</h1>
           <hr/>
           <br/>
+          <div id="subheader">
+            <div id='contract-balance-text' class="alert alert-primary" role="alert">Please, connect your wallet</div>
+          </div>
+          <div class="challengeDescription">If you want to invest your money in a safe place at Bank we offer a Retirement Fund service! You will be able to withdraw your money in 10 years!</div>
         </div>
       </div>
 
-      <div>
-        <p id='contract-balance-text'></p>
+      <div id="challenge-body">
+
+        <div id="challenge-container">
+          <button id="withdraw-button" class="btn btn-danger">Withdraw</button>
+          <button id="collect-penalty-button" class="btn btn-primary">Collect Penalty</button>
+        </div>
+
+        <div id="info-container" class="row">
+          <div id="contract-deployed">Contract deployed at: <a id='contractAddressLink' href=''></a> </div>
+          <div id="check-solution-container">
+            <button id='checkSolutionButton' class="btn btn-success">Check Solution</button>
+            <div id="isCompleted" class="alert alert-danger"></div>
+          </div>
+        </div>
+
       </div>
-
-      <button id="withdraw-button">Withdraw</button>
-      <button id="collect-penalty-button">Collect Penalty</button>
-
-      <div id="info-container">
-        <p id="isCompleted"></p>
-        <p>Contract deployed at: <a id='contractAddressLink' href=''></a> </p>
-      </div>
-      <button id='checkSolutionButton'>Check Solution</button>
-
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

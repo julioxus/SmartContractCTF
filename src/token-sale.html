@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Token Sale!</title>
 
+    <link href="css/challenge.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,38 +21,47 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <div id='title-container' class="col-xs-12 col-sm-8 col-sm-push-2">
           <h1 class="text-center">Token Sale!</h1>
           <hr/>
           <br/>
+          <div id="subheader">
+            <div id='contract-balance-text' class="alert alert-primary" role="alert">Please, connect your wallet</div>
+          </div>
+          <div class="challengeDescription">Don't you have Bank tokens yet? This coin will allow you to do a lot of things! Please, enter here to exchange eth for Bank Coins. (You need to pay 1 eth to use this service)</div>
         </div>
       </div>
 
-    <div>
-      <p id='contract-balance-text'></p>
-      <p id='user-balance-text'></p>
-    </div>
+      <div id="challenge-body">
 
-      <div id="buy-form-container" class="row">
-      <form id='buy-form'>
-        <label for='buy-input'>Buy bank tokens:</label><br>
-        <input type="number" id='buy-input' name='buy-input' value=0><br>
-        <input class="buy-button" type="submit" data-id="0" value='Buy!'>
-      </form>
-      </div>
-      <div id="sell-form-container" class="row">
-        <form id='sell-form'>
-          <label for='sell-input'>Sell bank tokens:</label><br>
-          <input type="number" id='sell-input' name='sell-input' value=0><br>
-          <input class="sell-button" type="submit" data-id="0" value='Sell!'>
+        <div>
+          <p id='user-balance-text'></p>
+        </div>
+
+        <div id="buy-form-container" class="row">
+        <form id='buy-form'>
+          <label for='buy-input'>Buy bank tokens:</label><br>
+          <input type="number" id='buy-input' name='buy-input' value=0><br>
+          <input class="buy-button" type="submit" data-id="0" value='Buy!'>
         </form>
         </div>
 
-      <div id="info-container">
-        <p id="isCompleted"></p>
-        <p>Contract deployed at: <a id='contractAddressLink' href=''></a> </p>
+        <div id="sell-form-container" class="row">
+          <form id='sell-form'>
+            <label for='sell-input'>Sell bank tokens:</label><br>
+            <input type="number" id='sell-input' name='sell-input' value=0><br>
+            <input class="sell-button" type="submit" data-id="0" value='Sell!'>
+          </form>
+        </div>
+
+          <div id="info-container" class="row">
+            <div id="contract-deployed">Contract deployed at: <a id='contractAddressLink' href=''></a> </div>
+            <div id="check-solution-container">
+              <button id='checkSolutionButton' class="btn btn-success">Check Solution</button>
+              <div id="isCompleted" class="alert alert-danger"></div>
+            </div>
+          </div>
       </div>
-      <button id='checkSolutionButton'>Check Solution</button>
 
     </div>
 
