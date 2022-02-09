@@ -37,6 +37,36 @@
     align-items: center;
 }
 
+#sale-forms-container {
+    display: flex;
+    height: 100%;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#token-balances {
+    display: flex;
+}
+
+#user-balance-text {
+    margin-left: 20px;
+}
+
+#sell-input {
+    width: 70px;
+}
+
+#buy-input {
+    width: 70px;
+}
+
+#retirement-buttons-container {
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+}
+
 #info-container {
     width: 650px;
     height: 200px;
@@ -46,10 +76,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-#contract-deployed {
-
 }
 
 #check-solution-container {
