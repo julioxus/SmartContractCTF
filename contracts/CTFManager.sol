@@ -11,6 +11,7 @@ contract CTFManager {
     struct Challenge {
         address addr;
         bool solved;
+        string flag;
     }
 
     // Define user struct
@@ -30,8 +31,8 @@ contract CTFManager {
         owner = msg.sender; 
     }
 
-    // Creates or update a user.
-    function createUser(string username) public {
+    // Set username
+    function setUsername(string username) public {
         ctfUsers[msg.sender].username = username;
     }
 
@@ -50,16 +51,16 @@ contract CTFManager {
 
         if(challengeId == 1){
             LotteryChallenge lotteryInstance = (new LotteryChallenge).value(1 ether)();
-            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(lotteryInstance), solved:false});
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(lotteryInstance), solved:false, flag:'atzwEzo8NRsjI22R'});
         } else if (challengeId == 2){
             TokenSaleChallenge tokenSaleInstance = (new TokenSaleChallenge).value(1 ether)();
-            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(tokenSaleInstance), solved:false});
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(tokenSaleInstance), solved:false, flag:'aZ4xAEkNPjejrojS'});
         } else if (challengeId == 3){
             RetirementFundChallenge retirementFundInstance = (new RetirementFundChallenge).value(1 ether)(msg.sender);
-            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(retirementFundInstance), solved:false});
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(retirementFundInstance), solved:false, flag:'gS0tuze1bt80xHqE'});
         } else if (challengeId == 4){
             AccountTakeoverChallenge accountTakeoverInstance = new AccountTakeoverChallenge();
-            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(accountTakeoverInstance), solved:false});
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(accountTakeoverInstance), solved:false, flag:'khVJZGaccwUZEqyZ'});
         }
         
     }
@@ -78,18 +79,26 @@ contract CTFManager {
     }
 
     // Update the challenge completion state
-    function solveChallenge(uint8 challengeId) public {
+    function solveChallenge(uint8 challengeId) public returns (string) {
         address challengeAddr = ctfUsers[msg.sender].challenges[challengeId].addr;
+        bool solved;
 
         if(challengeId == 1){
-            ctfUsers[msg.sender].challenges[challengeId].solved = LotteryChallenge(challengeAddr).isComplete();
+            solved = LotteryChallenge(challengeAddr).isComplete();
+            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         } else if (challengeId == 2){
-            ctfUsers[msg.sender].challenges[challengeId].solved = TokenSaleChallenge(challengeAddr).isComplete();
+            solved = TokenSaleChallenge(challengeAddr).isComplete();
+            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         } else if (challengeId == 3){
-            ctfUsers[msg.sender].challenges[challengeId].solved = RetirementFundChallenge(challengeAddr).isComplete();
+            solved = RetirementFundChallenge(challengeAddr).isComplete();
+            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         } else if (challengeId == 4){
-            ctfUsers[msg.sender].challenges[challengeId].solved = AccountTakeoverChallenge(challengeAddr).isComplete();
+            solved = AccountTakeoverChallenge(challengeAddr).isComplete();
+            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         }
+
+        if(solved){ return ctfUsers[msg.sender].challenges[challengeId].flag; }
+        else { return 'Challenge not solved'; }
     }
     
 }

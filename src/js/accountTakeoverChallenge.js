@@ -138,7 +138,8 @@ App = {
       event.preventDefault();
   
       App.initCTFManagerInstance(function (account, CTFManagerInstance){
-        CTFManagerInstance.solveChallenge(4, {from: account}).then(function() {
+        CTFManagerInstance.solveChallenge.call(4, {from: account}).then(function(flag) {
+          alert("Flag: " + flag);
           location.reload();
         }).catch(function(err) {
           console.log(err.message);

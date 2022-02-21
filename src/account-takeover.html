@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Account Takeover!</title>
 
+    <link href="css/challenge.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,24 +21,30 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <div id='title-container' class="col-xs-12 col-sm-8 col-sm-push-2">
           <h1 class="text-center">Account Takeover!</h1>
           <hr/>
           <br/>
+          <div class="challengeDescription">Only 0x883C9944e456C4cDd254300beE4C716bE11e9aDF have access to this section!</div>
         </div>
       </div>
 
-      <div>
-        <p>Only 0x883C9944e456C4cDd254300beE4C716bE11e9aDF have access to this section!</p>
+      <div id="challenge-body">
+
+        <div id="challenge-container">
+          <button id="authenticate-button" class="btn btn-primary">Authenticate</button>
+        </div>
+
+       <div id="info-container" class="row">
+          <div id="contract-deployed">Contract deployed at: <a id='contractAddressLink' href=''></a> </div>
+          <div id="check-solution-container">
+            <button id='checkSolutionButton' class="btn btn-success">Check Solution</button>
+            <div id="isCompleted" class="alert alert-danger"></div>
+          </div>
+        </div>
+      
       </div>
 
-      <button id="authenticate-button">Authenticate</button>
-
-      <div id="info-container">
-        <p id="isCompleted"></p>
-        <p>Contract deployed at: <a id='contractAddressLink' href=''></a> </p>
-      </div>
-      <button id='checkSolutionButton'>Check Solution</button>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

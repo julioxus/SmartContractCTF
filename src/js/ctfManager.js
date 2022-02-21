@@ -49,7 +49,7 @@ App = {
     },
   
     bindEvents: function() {
-        $('#register-form').submit(App.createUser);
+        $('#register-form').submit(App.setUsername);
 
         // Challenge 1 deploy
         $('#challenge1-deploy').click(App.deployLottery);
@@ -94,13 +94,13 @@ App = {
 
     },
 
-    createUser: function(event) {
+    setUsername: function(event) {
 
         event.preventDefault();
         var username = $('#username-input').val()
     
         App.initCTFManagerInstance(function (account, CTFManagerInstance){
-            CTFManagerInstance.createUser(username, {from: account}).then(function(result) {
+            CTFManagerInstance.setUsername(username, {from: account}).then(function(result) {
               location.reload();
             }).catch(function(err) {
               console.log(err.message);
