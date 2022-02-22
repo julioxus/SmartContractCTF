@@ -53,19 +53,23 @@ App = {
 
         // Challenge 1 deploy
         $('#challenge1-deploy').click(App.deployLottery);
-        $('#challenge1-button').click(function(){window.location.href = "./lottery.html"});
+        $('#challenge1-play-button').click(function(){window.location.href = "./lottery.html"});
+        $('#challenge1-reset-button').click(App.deployLottery);
 
         // Challenge 2 deploy
         $('#challenge2-deploy').click(App.deployTokenSale);
-        $('#challenge2-button').click(function(){window.location.href = "./token-sale.html"});
+        $('#challenge2-play-button').click(function(){window.location.href = "./token-sale.html"});
+        $('#challenge2-reset-button').click(App.deployTokenSale);
 
         // Challenge 3 deploy
         $('#challenge3-deploy').click(App.deployRetirementFund);
-        $('#challenge3-button').click(function(){window.location.href = "./retirement-fund.html"});
+        $('#challenge3-play-button').click(function(){window.location.href = "./retirement-fund.html"});
+        $('#challenge3-reset-button').click(App.deployRetirementFund);
 
         // Challenge 4 deploy
         $('#challenge4-deploy').click(App.deployAccountTakeover);
-        $('#challenge4-button').click(function(){window.location.href = "./account-takeover.html"});
+        $('#challenge4-play-button').click(function(){window.location.href = "./account-takeover.html"});
+        $('#challenge4-reset-button').click(App.deployAccountTakeover);
     },
 
     initInterface: function() {

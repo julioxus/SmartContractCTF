@@ -64,6 +64,10 @@
     align-self: center;
 }
 
+.play-buttons button {
+    margin-right: 10px;
+}
+
 .challenge-status {
     margin: auto;
     color: red;
