@@ -89,7 +89,7 @@ App = {
 
     App.initCTFManagerInstance(function (account, CTFManagerInstance){
       CTFManagerInstance.getChallenge(challengeId, {from: account}).then(function(challenge){
-        // Check which challenges the user has deployed
+        // Check if challenge is deployed and show address
         if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
           $('#contractAddressLink').text(challenge[0]);
           $('#contractAddressLink').attr("href", 'https://ropsten.etherscan.io/address/' + challenge[0]);
@@ -108,9 +108,12 @@ App = {
             // Check if the challenge is complete
             const complete = challenge[1];
             if (complete){
-              $('#isCompleted').text('Challenge is completed!')
+              CTFManagerInstance.solveChallenge.call(challengeId, {from: account}).then(function(flag){
+                var obj = $('#isCompleted').text('Challenge is completed!\n FLAG{'+flag+'}');
+                obj.html(obj.html().replace(/\n/g,'<br/>'));
+              });
             } else {
-              $('#isCompleted').text('Challenge is NOT completed!')
+              $('#isCompleted').text('Challenge is NOT completed!');
             }
 
             App.getBalance();
@@ -152,8 +155,7 @@ App = {
     event.preventDefault();
 
     App.initCTFManagerInstance(function (account, CTFManagerInstance){
-      CTFManagerInstance.solveChallenge.call(1, {from: account}).then(function(flag) {
-        alert("Flag: " + flag);
+      CTFManagerInstance.solveChallenge(1, {from: account}).then(function() {
         location.reload();
       }).catch(function(err) {
         console.log(err.message);

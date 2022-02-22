@@ -65,11 +65,6 @@ contract CTFManager {
         
     }
 
-    // Remove challenge from user
-    function removeChallenge(uint8 challengeId) public {
-        delete(ctfUsers[msg.sender].challenges[challengeId]);
-    }
-
     // Fetch Challenge n from user
     function getChallenge(uint8 challengeId) public view returns (address, bool) {
         return (
@@ -85,17 +80,15 @@ contract CTFManager {
 
         if(challengeId == 1){
             solved = LotteryChallenge(challengeAddr).isComplete();
-            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         } else if (challengeId == 2){
             solved = TokenSaleChallenge(challengeAddr).isComplete();
-            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         } else if (challengeId == 3){
             solved = RetirementFundChallenge(challengeAddr).isComplete();
-            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         } else if (challengeId == 4){
             solved = AccountTakeoverChallenge(challengeAddr).isComplete();
-            ctfUsers[msg.sender].challenges[challengeId].solved = solved;
         }
+
+        ctfUsers[msg.sender].challenges[challengeId].solved = solved;
 
         if(solved){ return ctfUsers[msg.sender].challenges[challengeId].flag; }
         else { return 'Challenge not solved'; }

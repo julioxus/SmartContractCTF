@@ -164,7 +164,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 747,
+                            "referencedDeclaration": 698,
                             "src": "215:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -218,10 +218,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        750,
-                        751
+                        701,
+                        702
                       ],
-                      "referencedDeclaration": 750,
+                      "referencedDeclaration": 701,
                       "src": "207:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -509,10 +509,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                750,
-                                751
+                                701,
+                                702
                               ],
-                              "referencedDeclaration": 750,
+                              "referencedDeclaration": 701,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -553,7 +553,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 747,
+                                      "referencedDeclaration": 698,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -675,7 +675,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-02-21T19:13:11.610Z",
+  "updatedAt": "2022-02-22T18:08:12.069Z",
   "devdoc": {
     "methods": {}
   },
