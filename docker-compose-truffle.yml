@@ -1,6 +1,0 @@
-version: "3.9"
-services:
-  ganache:
-    image: trufflesuite/ganache-cli 
-    network_mode: host
-    command: node /app/ganache-core.docker.cli.js -a 100 -p 7545
