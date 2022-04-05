@@ -3,5 +3,5 @@
 truffle compile
 truffle migrate --reset
 mv build/contracts/*.json src/artifacts/
-cp -r /app/src /usr/local/apache2/htdocs/
+cp -r /app/src/* /var/www/html/
 /usr/sbin/apache2ctl -D FOREGROUND
