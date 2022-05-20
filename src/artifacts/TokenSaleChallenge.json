@@ -75,7 +75,7 @@
   "sourceMap": "26:693:5:-;;;219:7;206:9;:20;198:29;;;;;;;;26:693;;;;;;",
   "deployedSourceMap": "26:693:5:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;60:44;;8:9:-1;5:2;;;30:1;27;20:12;5:2;60:44:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;240:104;;8:9:-1;5:2;;;30:1;27;20:12;5:2;240:104:5;;;;;;;;;;;;;;;;;;;;;;;;;;;350:158;;;;;;;;;;;;;;;;;;;;;;;;;;514:203;;8:9:-1;5:2;;;30:1;27;20:12;5:2;514:203:5;;;;;;;;;;;;;;;;;;;;;;;;;;60:44;;;;;;;;;;;;;;;;;:::o;240:104::-;283:4;330:7;314:4;306:21;;;:31;299:38;;240:104;:::o;350:158::-;145:7;428:9;:27;415:9;:40;407:49;;;;;;;;492:9;467;:21;477:10;467:21;;;;;;;;;;;;;;;;:34;;;;;;;;;;;350:158;:::o;514:203::-;597:9;572;:21;582:10;572:21;;;;;;;;;;;;;;;;:34;;564:43;;;;;;;;643:9;618;:21;628:10;618:21;;;;;;;;;;;;;;;;:34;;;;;;;;;;;662:10;:19;;:48;145:7;682:9;:27;662:48;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;662:48:5;514:203;:::o",
   "source": "pragma solidity ^0.4.21;\n\ncontract TokenSaleChallenge {\n    mapping(address => uint256) public balanceOf;\n    uint256 constant PRICE_PER_TOKEN = 1 ether;\n\n    constructor() public payable {\n        require(msg.value == 1 ether);\n    }\n\n    function isComplete() public view returns (bool) {\n        return address(this).balance < 1 ether;\n    }\n\n    function buy(uint256 numTokens) public payable {\n        require(msg.value == numTokens * PRICE_PER_TOKEN);\n\n        balanceOf[msg.sender] += numTokens;\n    }\n\n    function sell(uint256 numTokens) public {\n        require(balanceOf[msg.sender] >= numTokens);\n\n        balanceOf[msg.sender] -= numTokens;\n        msg.sender.transfer(numTokens * PRICE_PER_TOKEN);\n    }\n}",
-  "sourcePath": "/home/jmartinez/SmartContractCTF/contracts/TokenSaleChallenge.sol",
+  "sourcePath": "/home/jmartinez/SmartContractCTFDeploy/SmartContractCTF/contracts/TokenSaleChallenge.sol",
   "ast": {
     "absolutePath": "project:/contracts/TokenSaleChallenge.sol",
     "exportedSymbols": {
@@ -2466,7 +2466,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.6",
-  "updatedAt": "2022-04-08T07:49:16.016Z",
+  "updatedAt": "2022-05-20T11:57:05.782Z",
   "devdoc": {
     "methods": {}
   },

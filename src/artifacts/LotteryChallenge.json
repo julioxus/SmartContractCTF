@@ -42,7 +42,7 @@
   "sourceMap": "26:473:2:-;;;137:7;124:9;:20;116:29;;;;;;;;205:1;190:12;:16;180:27;209:3;170:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;164:50;;;155:6;;:59;;;;;;;;;;;;;;;;;;26:473;;;;;;",
   "deployedSourceMap": "26:473:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;332:165;;;;;;;;;;;;;;;;;;;;;;;;;;;;227:99;;8:9:-1;5:2;;;30:1;27;20:12;5:2;227:99:2;;;;;;;;;;;;;;;;;;;;;;;;;;;332:165;402:7;389:9;:20;381:29;;;;;;;;430:6;;;;;;;;;;;425:11;;:1;:11;;;421:70;;;452:10;:19;;:28;472:7;452:28;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;452:28:2;421:70;332:165;:::o;227:99::-;270:4;318:1;301:4;293:21;;;:26;286:33;;227:99;:::o",
   "source": "pragma solidity ^0.4.21;\n\ncontract LotteryChallenge {\n    uint8 answer;\n\n    constructor() public payable {\n        require(msg.value == 1 ether);\n        answer = uint8(keccak256(blockhash(block.number - 1), now));\n    }\n\n    function isComplete() public view returns (bool) {\n        return address(this).balance == 0;\n    }\n\n    function guess(uint8 n) public payable {\n        require(msg.value == 1 ether);\n\n        if (n == answer) {\n            msg.sender.transfer(2 ether);\n        }\n    }\n}",
-  "sourcePath": "/home/jmartinez/SmartContractCTF/contracts/LotteryChallenge.sol",
+  "sourcePath": "/home/jmartinez/SmartContractCTFDeploy/SmartContractCTF/contracts/LotteryChallenge.sol",
   "ast": {
     "absolutePath": "project:/contracts/LotteryChallenge.sol",
     "exportedSymbols": {
@@ -2003,7 +2003,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.6",
-  "updatedAt": "2022-04-08T07:49:16.014Z",
+  "updatedAt": "2022-05-20T11:57:05.781Z",
   "devdoc": {
     "methods": {}
   },
