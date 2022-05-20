@@ -92,7 +92,7 @@ App = {
         // Check if challenge is deployed and show address
         if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
           $('#contractAddressLink').text(challenge[0]);
-          $('#contractAddressLink').attr("href", 'https://ropsten.etherscan.io/address/' + challenge[0]);
+          $('#contractAddressLink').attr("href", 'https://ethereum-web:5432/address/' + challenge[0]);
           
           $.getJSON('artifacts/LotteryChallenge.json', function(data) {
             // Get the necessary contract artifact file and instantiate it with @truffle/contract
