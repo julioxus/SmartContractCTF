@@ -88,7 +88,7 @@ App = {
           // Check which challenges the user has deployed
           if(challenge[0] !== '0x0000000000000000000000000000000000000000'){
             $('#contractAddressLink').text(challenge[0]);
-            $('#contractAddressLink').attr("href", 'https://ethereum-web:5432/address/' + challenge[0]);
+            $('#contractAddressLink').attr("href", 'https://ethereum-web:4001/address/' + challenge[0]);
             
             $.getJSON('artifacts/AccountTakeoverChallenge.json', function(data) {
               // Get the necessary contract artifact file and instantiate it with @truffle/contract
