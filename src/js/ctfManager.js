@@ -67,9 +67,9 @@ App = {
         $('#challenge3-reset-button').click(App.deployRetirementFund);
 
         // Challenge 4 deploy
-        $('#challenge4-deploy').click(App.deployAccountTakeover);
-        $('#challenge4-play-button').click(function(){window.location.href = "./account-takeover.html"});
-        $('#challenge4-reset-button').click(App.deployAccountTakeover);
+        $('#challenge4-deploy').click(App.deployAssumeOwnership);
+        $('#challenge4-play-button').click(function(){window.location.href = "./assume-ownership.html"});
+        $('#challenge4-reset-button').click(App.deployAssumeOwnership);
     },
 
     initInterface: function() {
@@ -175,7 +175,7 @@ App = {
       App.deployChallenge(3);
     },
 
-    deployAccountTakeover: function(){
+    deployAssumeOwnership: function(){
       App.deployChallenge(4);
     }
 };

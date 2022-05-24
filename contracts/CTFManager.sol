@@ -3,7 +3,7 @@ pragma solidity ^0.4.21;
 import "./LotteryChallenge.sol";
 import "./TokenSaleChallenge.sol";
 import "./RetirementFundChallenge.sol";
-import "./AccountTakeoverChallenge.sol";
+import "./AssumeOwnershipChallenge.sol";
 
 contract CTFManager {
 
@@ -59,8 +59,8 @@ contract CTFManager {
             RetirementFundChallenge retirementFundInstance = (new RetirementFundChallenge).value(1 ether)(msg.sender);
             ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(retirementFundInstance), solved:false, flag:'gS0tuze1bt80xHqE'});
         } else if (challengeId == 4){
-            AccountTakeoverChallenge accountTakeoverInstance = new AccountTakeoverChallenge();
-            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(accountTakeoverInstance), solved:false, flag:'khVJZGaccwUZEqyZ'});
+            AssumeOwnershipChallenge assumeOwnershipInstance = new AssumeOwnershipChallenge();
+            ctfUsers[msg.sender].challenges[challengeId] = Challenge({addr:address(assumeOwnershipInstance), solved:false, flag:'khVJZGaccwUZEqyZ'});
         }
         
     }
@@ -85,7 +85,7 @@ contract CTFManager {
         } else if (challengeId == 3){
             solved = RetirementFundChallenge(challengeAddr).isComplete();
         } else if (challengeId == 4){
-            solved = AccountTakeoverChallenge(challengeAddr).isComplete();
+            solved = AssumeOwnershipChallenge(challengeAddr).isComplete();
         }
 
         ctfUsers[msg.sender].challenges[challengeId].solved = solved;

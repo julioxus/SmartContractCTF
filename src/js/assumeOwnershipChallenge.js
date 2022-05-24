@@ -68,14 +68,14 @@ App = {
       });    
     },
 
-    initAccountTakeoverChallengeInstance: function(address, myCallback){
+    initAssumeOwnershipChallengeInstance: function(address, myCallback){
 
       web3.eth.getAccounts(async function(error, accounts) {
           if (error) {
             console.log(error);
           }
           var account = accounts[0];
-          var instance = await App.contracts.AccountTakeoverChallenge.at(address).then(async function(instance) {
+          var instance = await App.contracts.AssumeOwnershipChallenge.at(address).then(async function(instance) {
             return instance;
         });
         myCallback(account, instance);
@@ -90,13 +90,13 @@ App = {
             $('#contractAddressLink').text(challenge[0]);
             $('#contractAddressLink').attr("href", 'https://ethereum-web:4001/address/' + challenge[0]);
             
-            $.getJSON('artifacts/AccountTakeoverChallenge.json', function(data) {
+            $.getJSON('artifacts/AssumeOwnershipChallenge.json', function(data) {
               // Get the necessary contract artifact file and instantiate it with @truffle/contract
-              var AccountTakeoverChallengeArtifact = data;
-              App.contracts.AccountTakeoverChallenge = TruffleContract(AccountTakeoverChallengeArtifact);
+              var AssumeOwnershipChallengeArtifact = data;
+              App.contracts.AssumeOwnershipChallenge = TruffleContract(AssumeOwnershipChallengeArtifact);
             
               // Set the provider for our contract
-              App.contracts.AccountTakeoverChallenge.setProvider(App.web3Provider);
+              App.contracts.AssumeOwnershipChallenge.setProvider(App.web3Provider);
             
               // Save challenge address
               App.challengeAddr = challenge[0];
@@ -126,8 +126,8 @@ App = {
 
       event.preventDefault();
 
-      App.initAccountTakeoverChallengeInstance(App.challengeAddr, function (account, accountTakeoverInstance){
-        accountTakeoverInstance.authenticate({from: account}).then(function(){
+      App.initAssumeOwnershipChallengeInstance(App.challengeAddr, function (account, assumeOwnershipInstance){
+        assumeOwnershipInstance.authenticate({from: account}).then(function(){
           console.log('Acces Granted');
           location.reload();
         }).catch(function(err) {
